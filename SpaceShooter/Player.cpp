@@ -5,8 +5,10 @@ Player::Player(sf::Texture* texture, sf::Texture* projectileTexture, float speed
 {
 	this->speed = speed;
 	rotation = 0;
-	fireRate = 0.3f;
+	fireRate = 0.2f;
 	fireTimer = 0.0f;
+	fireCooldown = 3.0f;
+	bulletCnt = 5;
 
 	body.setSize(sf::Vector2f(420.0f, 300.0f));
 	body.setOrigin(body.getSize() / 2.0f);
@@ -23,7 +25,7 @@ Player::~Player()
 void Player::Update(float deltaTime, sf::RenderWindow& window)
 {
 	sf::Vector2f movement(0.0f, 0.0f);
-	HandleInput(deltaTime, &movement, &fireTimer);
+	HandleInput(deltaTime, &movement, &fireTimer, &bulletCnt);
 
 	// ROTATION
 	if (movement.x != 0.0f)
@@ -41,6 +43,11 @@ void Player::Update(float deltaTime, sf::RenderWindow& window)
 
 	// PROJECTILES
 	fireTimer += deltaTime;
+	fireCooldown -= deltaTime;
+	if (fireCooldown <=  0.0f) {
+		fireCooldown = 3.0f;
+		bulletCnt = 5;
+	}
 
 	for (auto& projectile : projectiles) {
 		projectile.Update(deltaTime);
@@ -66,7 +73,7 @@ void Player::Draw(sf::RenderWindow& window)
 	window.draw(body);
 }
 
-void Player::HandleInput(float deltaTime, sf::Vector2f* movement, float* fireTimer)
+void Player::HandleInput(float deltaTime, sf::Vector2f* movement, float* fireTimer, int* bulletCnt)
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) or sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
 		movement->x -= speed * deltaTime;
@@ -76,8 +83,10 @@ void Player::HandleInput(float deltaTime, sf::Vector2f* movement, float* fireTim
 		movement->x += speed * deltaTime;
 		rotation = 10.0f;
 	}
-	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Space) or sf::Mouse::isButtonPressed(sf::Mouse::Left)) && *fireTimer >= fireRate) {
+	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Space) or sf::Mouse::isButtonPressed(sf::Mouse::Left)) && *fireTimer >= fireRate && *bulletCnt >= 0) {
+		*bulletCnt -= 1;
 		*fireTimer = 0.0f;
+
 		PlayerProjectile projectile = PlayerProjectile(projectileTexture, body.getPosition(), 500);
 		projectiles.push_back(projectile);
 	}

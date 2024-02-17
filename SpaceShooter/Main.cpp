@@ -8,7 +8,7 @@ int main()
     sf::Texture playerTexture;
     playerTexture.loadFromFile("../sprites/spaceship.png");
 	sf::Texture playerProjectileTexture;
-	playerProjectileTexture.loadFromFile("../sprites/projectile.png");
+	playerProjectileTexture.loadFromFile("../sprites/bullet.png");
 
 	Player player(&playerTexture, &playerProjectileTexture, 600.f);
 
@@ -28,7 +28,7 @@ int main()
 		}
 
 		player.Update(deltaTime,window);
-		window.clear(sf::Color(123, 186, 157));
+		window.clear(sf::Color(245, 66, 93));
 		player.Draw(window);
 		window.display();
 	}

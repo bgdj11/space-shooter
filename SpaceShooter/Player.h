@@ -10,7 +10,7 @@ public:
 
 	void Update(float deltaTime, sf::RenderWindow& window);
 	void Draw(sf::RenderWindow& window);
-	void HandleInput(float deltaTime, sf::Vector2f* movement, float* fireTimer);
+	void HandleInput(float deltaTime, sf::Vector2f* movement, float* fireTimer, int* bulletCnt);
 
 private:
 	sf::RectangleShape body;
@@ -20,6 +20,8 @@ private:
 	sf::Texture* projectileTexture;
 	float fireRate;
 	float fireTimer;
+	float fireCooldown;
+	int bulletCnt;
 };
 
 
