@@ -3,11 +3,12 @@
 #include "PlayerProjectile.h"
 #include "Collider.h"
 #include "EnemyContainer.h"
+#include "Animator.h"
 
 class Player
 {
 public:
-	Player(sf::Texture* texture, sf::Texture* projectileTexture ,float speed, sf::View& view);
+	Player(sf::Texture* texture, sf::Texture* projectileTexture, float speed, sf::View& view, sf::Vector2u imageCount, float switchTime);
 	~Player();
 
 	void Update(float deltaTime, sf::View& view, EnemyContainer* enemy);
@@ -24,6 +25,7 @@ private:
 	float fireTimer;
 	float fireCooldown;
 	int bulletCnt;
+	Animator animator;
 };
 
 

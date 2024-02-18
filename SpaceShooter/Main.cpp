@@ -41,11 +41,11 @@ int main()
 	sf::View view(sf::FloatRect(0, 0, VIEW_WIDTH, VIEW_HEIGHT));
 
     sf::Texture playerTexture;
-    playerTexture.loadFromFile("../sprites/spaceship.png");
+    playerTexture.loadFromFile("../sprites/spacecraft.png");
 	sf::Texture playerProjectileTexture;
 	playerProjectileTexture.loadFromFile("../sprites/bullet.png");
 
-	Player player(&playerTexture, &playerProjectileTexture, 600.f, view);
+	Player player(&playerTexture, &playerProjectileTexture, 600.f, view, sf::Vector2u(4, 1), 0.1f);
 
 	EnemyContainer enemy(nullptr, sf::Vector2f(100.0f, 100.0f), sf::Vector2f(500.0f, 150.0f));
 

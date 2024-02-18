@@ -1,7 +1,8 @@
 #include "Player.h"
 #include <iostream>
 
-Player::Player(sf::Texture* texture, sf::Texture* projectileTexture, float speed, sf::View& view)
+Player::Player(sf::Texture* texture, sf::Texture* projectileTexture, float speed, sf::View& view, sf::Vector2u imageCount, float switchTime)
+		: animator(texture, imageCount, switchTime)
 {
 	this->speed = speed;
 	rotation = 0;
@@ -10,7 +11,7 @@ Player::Player(sf::Texture* texture, sf::Texture* projectileTexture, float speed
 	fireCooldown = 3.0f;
 	bulletCnt = 5;
 
-	body.setSize(sf::Vector2f(420.0f, 300.0f));
+	body.setSize(sf::Vector2f(texture->getSize().x / imageCount.x / 2.5f, texture->getSize().y / 2.5f));
 	body.setOrigin(body.getSize() / 2.0f);
 	body.setTexture(texture);
 	body.setPosition(view.getSize().x / 2.0f, view.getSize().y - 100.0f);
@@ -28,6 +29,10 @@ void Player::Update(float deltaTime, sf::View& view, EnemyContainer* enemy)
 
 	sf::Vector2f movement(0.0f, 0.0f);
 	HandleInput(deltaTime, &movement, &fireTimer, &bulletCnt);
+
+	// ANIMATION
+	animator.Update(0, deltaTime);
+	body.setTextureRect(animator.uvRect);
 
 	// ROTATION
 	if (movement.x != 0.0f)
