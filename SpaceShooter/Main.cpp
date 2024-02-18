@@ -33,7 +33,6 @@ void ResizeView(const sf::RenderWindow& window, sf::View& view)
 	}
 }
 
-
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(1000.0f, 1000.0f), "Space Shooter", sf::Style::Close | sf::Style::Resize);
