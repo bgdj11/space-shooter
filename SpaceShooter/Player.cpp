@@ -1,7 +1,7 @@
 #include "Player.h"
 #include <iostream>
 
-Player::Player(sf::Texture* texture, sf::Texture* projectileTexture, float speed)
+Player::Player(sf::Texture* texture, sf::Texture* projectileTexture, float speed, sf::View& view)
 {
 	this->speed = speed;
 	rotation = 0;
@@ -13,7 +13,7 @@ Player::Player(sf::Texture* texture, sf::Texture* projectileTexture, float speed
 	body.setSize(sf::Vector2f(420.0f, 300.0f));
 	body.setOrigin(body.getSize() / 2.0f);
 	body.setTexture(texture);
-	body.setPosition(500.0f, 900.0f);
+	body.setPosition(view.getSize().x / 2.0f, view.getSize().y - 100.0f);
 
 	this->projectileTexture = projectileTexture;
 }
@@ -22,8 +22,10 @@ Player::~Player()
 {
 }
 
-void Player::Update(float deltaTime, sf::RenderWindow& window)
+void Player::Update(float deltaTime, sf::View& view)
 {
+	body.setPosition(body.getPosition().x, view.getSize().y - 100.0f);
+
 	sf::Vector2f movement(0.0f, 0.0f);
 	HandleInput(deltaTime, &movement, &fireTimer, &bulletCnt);
 
@@ -37,8 +39,8 @@ void Player::Update(float deltaTime, sf::RenderWindow& window)
 
 	// SCREEN WRAPPING
 	if (body.getPosition().x < 0)
-		body.setPosition(window.getSize().x, body.getPosition().y);
-	if (body.getPosition().x > window.getSize().x)
+		body.setPosition(view.getSize().x, body.getPosition().y);
+	if (body.getPosition().x > view.getSize().x)
 		body.setPosition(0.0f, body.getPosition().y);
 
 	// PROJECTILES
@@ -55,8 +57,6 @@ void Player::Update(float deltaTime, sf::RenderWindow& window)
 		if (projectile.GetPosition() + 100.0f < 0.0f)
 			projectile.SetStatus(false);
 	}
-
-	std::cout << projectiles.size() << std::endl;
 		
 	projectiles.erase(
 		std::remove_if(projectiles.begin(), projectiles.end(),
@@ -83,7 +83,7 @@ void Player::HandleInput(float deltaTime, sf::Vector2f* movement, float* fireTim
 		movement->x += speed * deltaTime;
 		rotation = 10.0f;
 	}
-	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Space) or sf::Mouse::isButtonPressed(sf::Mouse::Left)) && *fireTimer >= fireRate && *bulletCnt >= 0) {
+	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Space) or sf::Mouse::isButtonPressed(sf::Mouse::Left)) && *fireTimer >= fireRate && *bulletCnt > 0) {
 		*bulletCnt -= 1;
 		*fireTimer = 0.0f;
 

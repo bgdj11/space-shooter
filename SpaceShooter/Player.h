@@ -5,10 +5,10 @@
 class Player
 {
 public:
-	Player(sf::Texture* texture, sf::Texture* projectileTexture ,float speed);
+	Player(sf::Texture* texture, sf::Texture* projectileTexture ,float speed, sf::View& view);
 	~Player();
 
-	void Update(float deltaTime, sf::RenderWindow& window);
+	void Update(float deltaTime, sf::View& view);
 	void Draw(sf::RenderWindow& window);
 	void HandleInput(float deltaTime, sf::Vector2f* movement, float* fireTimer, int* bulletCnt);
 
