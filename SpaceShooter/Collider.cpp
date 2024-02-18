@@ -8,7 +8,7 @@ Collider::~Collider()
 {
 }
 
-bool Collider::CheckCollision(Collider other, float pushForce)
+bool Collider::CheckCollision(Collider other)
 {
 	sf::Vector2f thisPosition = this->GetPosition();
 	sf::Vector2f thisHalfSize = this->GetHalfSize();
@@ -18,26 +18,12 @@ bool Collider::CheckCollision(Collider other, float pushForce)
 	float deltaX = otherPosition.x - thisPosition.x;
 	float deltaY = otherPosition.y - thisPosition.y;
 
-	float intersectX = abs(deltaX) - (otherHalfSize.x + otherHalfSize.x);
-	float intersectY = abs(deltaY) - (otherHalfSize.y + otherHalfSize.y);
+	float intersectX = abs(deltaX) - (thisHalfSize.x + otherHalfSize.x);
+	float intersectY = abs(deltaY) - (thisHalfSize.y + otherHalfSize.y);
 
 	if (intersectX < 0.0f && intersectY < 0.0f)
-	{
-		pushForce = std::min(std::max(pushForce, 0.0f), 1.0f);
-
-		if (deltaY > 0.0f)
-		{
-			this->Move(0.0f, intersectY * (1.0f - pushForce));
-			other.Move(0.0f, -intersectY * pushForce);
-		}
-		else
-		{
-			this->Move(0.0f, -intersectY * (1.0f - pushForce));
-			other.Move(0.0f, intersectY * pushForce);
-		}
-
 		return true;
-	}
+
 	return false;
 }
 

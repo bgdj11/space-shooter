@@ -1,6 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "PlayerProjectile.h"
+#include "Collider.h"
+#include "EnemyContainer.h"
 
 class Player
 {
@@ -8,7 +10,7 @@ public:
 	Player(sf::Texture* texture, sf::Texture* projectileTexture ,float speed, sf::View& view);
 	~Player();
 
-	void Update(float deltaTime, sf::View& view);
+	void Update(float deltaTime, sf::View& view, EnemyContainer* enemy);
 	void Draw(sf::RenderWindow& window);
 	void HandleInput(float deltaTime, sf::Vector2f* movement, float* fireTimer, int* bulletCnt);
 

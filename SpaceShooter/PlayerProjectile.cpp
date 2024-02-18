@@ -42,3 +42,8 @@ void PlayerProjectile::SetStatus(bool status)
 	this->status = status;
 }
 
+Collider PlayerProjectile::GetCollider()
+{
+	return Collider(body);
+}
+

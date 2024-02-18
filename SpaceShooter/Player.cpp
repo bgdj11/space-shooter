@@ -22,7 +22,7 @@ Player::~Player()
 {
 }
 
-void Player::Update(float deltaTime, sf::View& view)
+void Player::Update(float deltaTime, sf::View& view, EnemyContainer* enemy)
 {
 	body.setPosition(body.getPosition().x, view.getSize().y - 100.0f);
 
@@ -56,6 +56,11 @@ void Player::Update(float deltaTime, sf::View& view)
 		
 		if (projectile.GetPosition() + 100.0f < 0.0f)
 			projectile.SetStatus(false);
+
+		// collision detection
+		if (enemy->GetCollider().CheckCollision(projectile.GetCollider())) {
+			enemy->Color(sf::Color::Blue);
+		}
 	}
 		
 	projectiles.erase(

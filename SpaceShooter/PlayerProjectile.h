@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "Collider.h"
 
 class PlayerProjectile
 {
@@ -13,6 +14,8 @@ public:
 	float GetPosition();
 	bool GetStatus() const;
 	void SetStatus(bool status);
+
+	Collider GetCollider();
 
 private:
 	sf::RectangleShape body;

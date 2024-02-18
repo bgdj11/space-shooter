@@ -1,5 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "Player.h"
+#include "Collider.h"
+#include "EnemyContainer.h"
 
 static const float VIEW_WIDTH = 1000.0f;
 static const float VIEW_HEIGHT = 1000.0f;
@@ -45,6 +47,8 @@ int main()
 
 	Player player(&playerTexture, &playerProjectileTexture, 600.f, view);
 
+	EnemyContainer enemy(nullptr, sf::Vector2f(100.0f, 100.0f), sf::Vector2f(500.0f, 150.0f));
+
     // TIME
     float deltaTime = 0.0f;
     sf::Clock clock;
@@ -69,8 +73,9 @@ int main()
 		background.setFillColor(sf::Color(245, 66, 93));
 		window.draw(background);
 
-		player.Update(deltaTime,view);
+		player.Update(deltaTime,view, &enemy);
 		player.Draw(window);
+		enemy.Draw(window);
 		window.display();
 	}
     return 0;
