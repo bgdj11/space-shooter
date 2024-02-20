@@ -5,7 +5,7 @@ PlayerProjectile::PlayerProjectile(sf::Texture* texture, sf::Vector2f position, 
 	this->speed = speed;
 	status = true;
 
-	body.setSize(sf::Vector2f(10.0f, 35.0f));
+	body.setSize(sf::Vector2f(14.0f, 55.0f));
 	body.setOrigin(body.getSize() / 2.0f);
 	body.setTexture(texture);
 	body.setPosition(position);
