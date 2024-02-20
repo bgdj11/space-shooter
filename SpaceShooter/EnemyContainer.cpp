@@ -13,11 +13,6 @@ EnemyContainer::~EnemyContainer()
 {
 }
 
-void EnemyContainer::Draw(sf::RenderWindow& window)
-{
-	window.draw(body);
-}
-
 void EnemyContainer::Color(sf::Color color)
 {
 	body.setFillColor(color);

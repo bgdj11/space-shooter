@@ -1,22 +1,21 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "PlayerProjectile.h"
-#include "Collider.h"
 #include "EnemyContainer.h"
 #include "Animator.h"
+#include "GameObject.h"
 
-class Player
+class Player : public GameObject
 {
 public:
 	Player(sf::Texture* texture, sf::Texture* projectileTexture, float speed, sf::View& view, sf::Vector2u imageCount, float switchTime);
 	~Player();
 
 	void Update(float deltaTime, sf::View& view, EnemyContainer* enemy);
-	void Draw(sf::RenderWindow& window);
+	void Draw(sf::RenderWindow& window) override;
 	void HandleInput(float deltaTime, sf::Vector2f* movement, float* fireTimer, int* bulletCnt);
 
 private:
-	sf::RectangleShape body;
 	float speed;
 	float rotation;
 	std::vector<PlayerProjectile> projectiles;

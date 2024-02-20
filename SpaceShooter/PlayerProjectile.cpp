@@ -22,11 +22,6 @@ void PlayerProjectile::Update(float deltaTime)
 	body.move(movement);
 }
 
-void PlayerProjectile::Draw(sf::RenderWindow& window)
-{
-	window.draw(body);
-}
-
 float PlayerProjectile::GetPosition()
 {
 	return body.getPosition().y;
@@ -40,10 +35,5 @@ bool PlayerProjectile::GetStatus() const
 void PlayerProjectile::SetStatus(bool status)
 {
 	this->status = status;
-}
-
-Collider PlayerProjectile::GetCollider()
-{
-	return Collider(body);
 }
 
