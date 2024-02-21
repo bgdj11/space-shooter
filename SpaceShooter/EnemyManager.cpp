@@ -27,3 +27,11 @@ void EnemyManager::DrawEnemies(sf::RenderWindow& window)
 		enemy->Draw(window);
 	}
 }
+
+void EnemyManager::Update()
+{
+	firstWave.erase(
+		std::remove_if(firstWave.begin(), firstWave.end(),
+			[](const std::shared_ptr<Enemy>& enemy) {return !enemy->GetStatus(); })
+		, firstWave.end());
+}

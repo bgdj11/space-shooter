@@ -1,1 +1,21 @@
 #include "Enemy.h"
+
+void Enemy::TakeDamage(int damage)
+{
+	health -= damage;
+}
+
+int Enemy::GetHealth()
+{
+	return health;
+}
+
+void Enemy::SetStatus(bool status)
+{
+	this->status = status;
+}
+
+bool Enemy::GetStatus()
+{
+	return status;
+}

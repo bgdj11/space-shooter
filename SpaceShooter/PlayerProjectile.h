@@ -12,9 +12,11 @@ public:
 	float GetPosition();
 	bool GetStatus() const;
 	void SetStatus(bool status);
+	int GetDamage();
 
 private:
 	float speed;
 	bool status;
+	int damage;
 };
 

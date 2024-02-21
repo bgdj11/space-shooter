@@ -16,5 +16,7 @@ public:
 	std::vector<std::shared_ptr<Enemy>>& GetFirstWave();
 	void DrawEnemies(sf::RenderWindow& window);
 
+	void Update();
+
 };
 

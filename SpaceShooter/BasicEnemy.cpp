@@ -2,7 +2,7 @@
 
 BasicEnemy::BasicEnemy(sf::Texture* texture, sf::Vector2f size, sf::Vector2f position)
 {
-	health = 5;
+	health = 3;
 	damage = 1;
 
 	body.setSize(size);

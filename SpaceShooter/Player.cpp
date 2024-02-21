@@ -98,3 +98,8 @@ void Player::HandleInput(float deltaTime, sf::Vector2f* movement, float* fireTim
 		projectiles.push_back(projectile);
 	}
 }
+
+std::vector<std::shared_ptr<PlayerProjectile>>& Player::GetPlayerProjectiles()
+{
+	return projectiles;
+}

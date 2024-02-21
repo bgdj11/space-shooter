@@ -9,6 +9,8 @@ PlayerProjectile::PlayerProjectile(sf::Texture* texture, sf::Vector2f position, 
 	body.setOrigin(body.getSize() / 2.0f);
 	body.setTexture(texture);
 	body.setPosition(position);
+
+	damage = 1;
 }
 
 PlayerProjectile::~PlayerProjectile()
@@ -37,3 +39,7 @@ void PlayerProjectile::SetStatus(bool status)
 	this->status = status;
 }
 
+int PlayerProjectile::GetDamage()
+{
+	return damage;
+}

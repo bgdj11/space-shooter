@@ -34,6 +34,26 @@ void ResizeView(const sf::RenderWindow& window, sf::View& view)
 	}
 }
 
+void HandleCollisions(Player& player, EnemyManager& enemyManager)
+{
+
+	for (auto& playerProjectile: player.GetPlayerProjectiles())
+	{
+		for (auto& enemy : enemyManager.GetFirstWave())
+		{
+			if (enemy->GetCollider().CheckCollision(playerProjectile->GetCollider()))
+			{
+				playerProjectile->SetStatus(false);
+				enemy->TakeDamage(playerProjectile->GetDamage());
+				if (enemy->GetHealth() <= 0) {
+					enemy->SetStatus(false);
+				}
+			}
+		}
+	}
+
+}
+
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(1000.0f, 1000.0f), "Space Shooter", sf::Style::Close | sf::Style::Resize);
@@ -74,6 +94,8 @@ int main()
 		window.draw(background);
 
 		player.Update(deltaTime,view);
+		HandleCollisions(player, enemyManager);
+		enemyManager.Update();
 		player.Draw(window);
 		enemyManager.DrawEnemies(window);
 		window.display();

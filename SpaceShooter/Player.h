@@ -14,11 +14,11 @@ public:
 	void Update(float deltaTime, sf::View& view);
 	void Draw(sf::RenderWindow& window) override;
 	void HandleInput(float deltaTime, sf::Vector2f* movement, float* fireTimer, int* bulletCnt);
+	std::vector<std::shared_ptr<PlayerProjectile>>& GetPlayerProjectiles();
 
 private:
 	float speed;
 	float rotation;
-	//std::vector<PlayerProjectile> projectiles;
 	std::vector<std::shared_ptr<PlayerProjectile>> projectiles;
 	sf::Texture* projectileTexture;
 	float fireRate;
