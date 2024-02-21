@@ -97,7 +97,7 @@ void Player::HandleInput(float deltaTime, sf::Vector2f* movement, float* fireTim
 		*bulletCnt -= 1;
 		*fireTimer = 0.0f;
 
-		PlayerProjectile projectile = PlayerProjectile(projectileTexture, body.getPosition(), 500);
+		PlayerProjectile projectile = PlayerProjectile(projectileTexture, sf::Vector2f(body.getPosition().x, body.getPosition().y - 25), 500);
 		projectiles.push_back(projectile);
 	}
 }

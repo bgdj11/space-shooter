@@ -43,13 +43,15 @@ int main()
     sf::Texture playerTexture;
     playerTexture.loadFromFile("../sprites/Engine_Ss_png.png");
 	sf::Texture playerProjectileTexture;
-	playerProjectileTexture.loadFromFile("../sprites/spark_bullet.png");
+	playerProjectileTexture.loadFromFile("../sprites/bullet_removed.png");
 	sf::Texture enemyTexture;
 	enemyTexture.loadFromFile("../sprites/ship_removed.png");
 
 	Player player(&playerTexture, &playerProjectileTexture, 600.f, view, sf::Vector2u(4, 1), 0.1f);
-
+	
 	EnemyContainer enemy(&enemyTexture, sf::Vector2f(180.0f, 180.0f), sf::Vector2f(500.0f, 150.0f));
+	EnemyContainer enemy2(nullptr, sf::Vector2f(130.0f, 130.0f), sf::Vector2f(200.0f, 200.0f));
+	EnemyContainer enemy3(nullptr, sf::Vector2f(130.0f, 130.0f), sf::Vector2f(800.0f, 200.0f));
 
     // TIME
     float deltaTime = 0.0f;
@@ -78,6 +80,8 @@ int main()
 		player.Update(deltaTime,view, &enemy);
 		player.Draw(window);
 		enemy.Draw(window);
+		enemy2.Draw(window);
+		enemy3.Draw(window);
 		window.display();
 	}
     return 0;

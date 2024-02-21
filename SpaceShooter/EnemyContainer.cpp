@@ -5,7 +5,7 @@ EnemyContainer::EnemyContainer(sf::Texture* texture, sf::Vector2f size, sf::Vect
 	body.setSize(size);
 	body.setPosition(position);
 	body.setFillColor(sf::Color::Yellow);
-	body.setTexture(texture);
+	//body.setTexture(texture);
 	body.setOrigin(body.getSize() / 2.0f);
 }
 
