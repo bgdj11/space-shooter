@@ -57,22 +57,22 @@ void Player::Update(float deltaTime, sf::View& view)
 	}
 
 	for (auto& projectile : projectiles) {
-		projectile.Update(deltaTime);
+		projectile->Update(deltaTime);
 		
-		if (projectile.GetPosition() + 100.0f < 0.0f)
-			projectile.SetStatus(false);
+		if (projectile->GetPosition() + 100.0f < 0.0f)
+			projectile->SetStatus(false);
 	}
 		
 	projectiles.erase(
 		std::remove_if(projectiles.begin(), projectiles.end(),
-			[](const PlayerProjectile& projectile) {return !projectile.GetStatus();})
+			[](const std::shared_ptr<PlayerProjectile>& projectile) {return !projectile->GetStatus();})
 		,projectiles.end());
 }
 
 void Player::Draw(sf::RenderWindow& window)
 {
 	for (auto& projectile : projectiles) {
-		projectile.Draw(window);
+		projectile->Draw(window);
 	}
 
 	window.draw(body);
@@ -92,7 +92,9 @@ void Player::HandleInput(float deltaTime, sf::Vector2f* movement, float* fireTim
 		*bulletCnt -= 1;
 		*fireTimer = 0.0f;
 
-		PlayerProjectile projectile = PlayerProjectile(projectileTexture, sf::Vector2f(body.getPosition().x, body.getPosition().y - 25), 500);
+		std::shared_ptr<PlayerProjectile> projectile = std::make_shared<PlayerProjectile>(projectileTexture, 
+			sf::Vector2f(body.getPosition().x, body.getPosition().y - 25), 500);
+
 		projectiles.push_back(projectile);
 	}
 }

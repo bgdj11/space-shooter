@@ -3,6 +3,7 @@
 #include "PlayerProjectile.h"
 #include "Animator.h"
 #include "GameObject.h"
+#include <memory>
 
 class Player : public GameObject
 {
@@ -17,7 +18,8 @@ public:
 private:
 	float speed;
 	float rotation;
-	std::vector<PlayerProjectile> projectiles;
+	//std::vector<PlayerProjectile> projectiles;
+	std::vector<std::shared_ptr<PlayerProjectile>> projectiles;
 	sf::Texture* projectileTexture;
 	float fireRate;
 	float fireTimer;
