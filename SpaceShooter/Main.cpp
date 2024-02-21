@@ -36,7 +36,6 @@ void ResizeView(const sf::RenderWindow& window, sf::View& view)
 
 void HandleCollisions(Player& player, EnemyManager& enemyManager)
 {
-
 	for (auto& playerProjectile: player.GetPlayerProjectiles())
 	{
 		for (auto& enemy : enemyManager.GetFirstWave())
@@ -51,7 +50,6 @@ void HandleCollisions(Player& player, EnemyManager& enemyManager)
 			}
 		}
 	}
-
 }
 
 int main()
