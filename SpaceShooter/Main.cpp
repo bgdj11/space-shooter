@@ -1,7 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "Player.h"
-#include "Collider.h"
-#include "EnemyContainer.h"
+#include "EnemyManager.h"
 
 static const float VIEW_WIDTH = 1000.0f;
 static const float VIEW_HEIGHT = 1000.0f;
@@ -48,10 +47,7 @@ int main()
 	enemyTexture.loadFromFile("../sprites/ship_removed.png");
 
 	Player player(&playerTexture, &playerProjectileTexture, 600.f, view, sf::Vector2u(4, 1), 0.1f);
-	
-	EnemyContainer enemy(&enemyTexture, sf::Vector2f(180.0f, 180.0f), sf::Vector2f(500.0f, 150.0f));
-	EnemyContainer enemy2(nullptr, sf::Vector2f(130.0f, 130.0f), sf::Vector2f(200.0f, 200.0f));
-	EnemyContainer enemy3(nullptr, sf::Vector2f(130.0f, 130.0f), sf::Vector2f(800.0f, 200.0f));
+	EnemyManager enemyManager;
 
     // TIME
     float deltaTime = 0.0f;
@@ -77,11 +73,9 @@ int main()
 		background.setFillColor(sf::Color(245, 66, 93));
 		window.draw(background);
 
-		player.Update(deltaTime,view, &enemy);
+		player.Update(deltaTime,view);
 		player.Draw(window);
-		enemy.Draw(window);
-		enemy2.Draw(window);
-		enemy3.Draw(window);
+		enemyManager.DrawEnemies(window);
 		window.display();
 	}
     return 0;
