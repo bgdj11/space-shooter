@@ -2,7 +2,7 @@
 #include <iostream>
 
 Player::Player(sf::Texture* texture, sf::Texture* projectileTexture, float speed, sf::View& view, sf::Vector2u imageCount, float switchTime)
-		: animator(texture, imageCount, switchTime)
+	: animator(texture, imageCount, switchTime)
 {
 	this->speed = speed;
 	rotation = 0;

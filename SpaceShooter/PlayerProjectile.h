@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "GameObject.h"
+#include "ParticleSystem.h"
 
 class PlayerProjectile : public GameObject
 {
@@ -13,10 +14,12 @@ public:
 	bool GetStatus() const;
 	void SetStatus(bool status);
 	int GetDamage();
+	void Draw(sf::RenderWindow& window) override;
 
 private:
 	float speed;
 	bool status;
 	int damage;
+	ParticleSystem particleSystem;
 };
 

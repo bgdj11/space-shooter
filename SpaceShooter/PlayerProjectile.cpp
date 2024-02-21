@@ -1,6 +1,7 @@
 #include "PlayerProjectile.h"
 
 PlayerProjectile::PlayerProjectile(sf::Texture* texture, sf::Vector2f position, float speed)
+	: particleSystem(10, 0.85f)
 {
 	this->speed = speed;
 	status = true;
@@ -11,6 +12,12 @@ PlayerProjectile::PlayerProjectile(sf::Texture* texture, sf::Vector2f position, 
 	body.setPosition(position);
 
 	damage = 1;
+
+	// PARTICLE SYSTEM
+	for (unsigned i = 0; i < 10; i++) {
+		sf::Vector2f velocity(rand() % 100 - 50, rand() % 100 - 50);
+		particleSystem.AddParticle(body.getPosition(), velocity, sf::Color(255, 94, 0));
+	}
 }
 
 PlayerProjectile::~PlayerProjectile()
@@ -22,6 +29,13 @@ void PlayerProjectile::Update(float deltaTime)
 	sf::Vector2f movement(0.0f, 0.0f);
 	movement.y -= speed * deltaTime;
 	body.move(movement);
+	
+	for (int i = 0; i < 2; i++) {
+		sf::Vector2f velocity(rand() % 100 - 50, rand() % 100 - 50);
+		particleSystem.AddParticle(body.getPosition(), velocity, sf::Color(255, 94, 0));
+	}
+
+	particleSystem.Update(deltaTime, body.getPosition(), sf::Vector2f(0.0f, speed));
 }
 
 float PlayerProjectile::GetPosition()
@@ -42,4 +56,10 @@ void PlayerProjectile::SetStatus(bool status)
 int PlayerProjectile::GetDamage()
 {
 	return damage;
+}
+
+void PlayerProjectile::Draw(sf::RenderWindow& window)
+{
+	particleSystem.Draw(window, sf::RenderStates());
+	window.draw(body);
 }

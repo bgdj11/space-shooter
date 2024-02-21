@@ -6,7 +6,7 @@ ParticleSystem::ParticleSystem(unsigned count, float particleLifeTime)
 	particles.reserve(count);
 }
 
-void ParticleSystem::AddParticle(const sf::Vector2f& position, const sf::Vector2f& velocity, const sf::Color& color)
+void ParticleSystem::AddParticle(const sf::Vector2f& position, const sf::Vector2f& velocity, sf::Color color)
 {
 	Particle particle;
 	particle.position = position;

@@ -60,7 +60,7 @@ int main()
     sf::Texture playerTexture;
     playerTexture.loadFromFile("../sprites/Engine_Ss_png.png");
 	sf::Texture playerProjectileTexture;
-	playerProjectileTexture.loadFromFile("../sprites/bullet_removed.png");
+	playerProjectileTexture.loadFromFile("../sprites/bullet.png");
 	sf::Texture enemyTexture;
 	enemyTexture.loadFromFile("../sprites/ship_removed.png");
 
@@ -88,7 +88,7 @@ int main()
 		window.setView(view);
 
 		sf::RectangleShape background(sf::Vector2f(view.getSize().x, view.getSize().y));
-		background.setFillColor(sf::Color(245, 66, 93));
+		background.setFillColor(sf::Color(14, 12, 122));
 		window.draw(background);
 
 		player.Update(deltaTime,view);
