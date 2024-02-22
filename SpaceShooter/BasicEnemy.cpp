@@ -4,18 +4,56 @@ BasicEnemy::BasicEnemy(sf::Texture* texture, sf::Vector2f size, sf::Vector2f pos
 {
 	health = 3;
 	damage = 1;
+	speed = 200.0f;
 
 	body.setSize(size);
 	body.setPosition(position);
 	body.setFillColor(sf::Color::Green);
 	//body.setTexture(texture);
 	body.setOrigin(body.getSize() / 2.0f);
+
+	basePosition = position;
+	movingLeft = true;
+	accumulatedTime = 0.0f;
 }
 
 BasicEnemy::~BasicEnemy()
 {
 }
 
-void BasicEnemy::Update()
+void BasicEnemy::Update(float deltaTime)
 {
+	sf::Vector2f movement(0.0f, 0.0f);
+	
+	accumulatedTime += deltaTime;
+
+	if (movingLeft) 
+	{
+		if (body.getPosition().x <= basePosition.x - 100.0f)
+		{
+			movement.x += speed * deltaTime;
+			movingLeft = false;
+		}
+		else
+		{
+			movement.x -= speed * deltaTime;
+		}
+	}
+	else
+	{
+		if (body.getPosition().x >= basePosition.x + 100.0f)
+		{
+			movement.x -= speed * deltaTime;
+			movingLeft = true;
+		}
+		else
+		{
+			movement.x += speed * deltaTime;
+		}
+	}
+
+	// movement.x = 0.5f * sin(accumulatedTime * 0.5f);
+	movement.y = 0.5f * sin(accumulatedTime * 5);
+
+	body.move(movement);
 }

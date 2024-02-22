@@ -28,10 +28,15 @@ void EnemyManager::DrawEnemies(sf::RenderWindow& window)
 	}
 }
 
-void EnemyManager::Update()
+void EnemyManager::Update(float deltaTime)
 {
 	firstWave.erase(
 		std::remove_if(firstWave.begin(), firstWave.end(),
 			[](const std::shared_ptr<Enemy>& enemy) {return !enemy->GetStatus(); })
 		, firstWave.end());
+
+	for (auto& enemy : firstWave)
+	{
+		enemy->Update(deltaTime);
+	}
 }

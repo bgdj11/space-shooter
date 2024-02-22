@@ -19,3 +19,8 @@ bool Enemy::GetStatus()
 {
 	return status;
 }
+
+void Enemy::Update(float deltaTime)
+{
+}
+

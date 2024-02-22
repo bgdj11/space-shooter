@@ -1,7 +1,7 @@
 #include "PlayerProjectile.h"
 
 PlayerProjectile::PlayerProjectile(sf::Texture* texture, sf::Vector2f position, float speed)
-	: particleSystem(10, 0.85f)
+	: particleSystem(10, 0.48f)
 {
 	this->speed = speed;
 	status = true;
@@ -31,8 +31,8 @@ void PlayerProjectile::Update(float deltaTime)
 	body.move(movement);
 	
 	for (int i = 0; i < 2; i++) {
-		sf::Vector2f velocity(rand() % 100 - 50, rand() % 100 - 50);
-		particleSystem.AddParticle(body.getPosition(), velocity, sf::Color(255, 94, 0));
+		sf::Vector2f velocity((rand() % 100 - 50) * 2, rand() % 100 - 50);
+		particleSystem.AddParticle(body.getPosition(), velocity, sf::Color(52, 235, 225));
 	}
 
 	particleSystem.Update(deltaTime, body.getPosition(), sf::Vector2f(0.0f, speed));

@@ -16,7 +16,7 @@ FirstBoss::~FirstBoss()
 {
 }
 
-void FirstBoss::Update()
+void FirstBoss::Update(float deltaTime)
 {
 	// find out !?
 }

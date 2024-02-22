@@ -93,7 +93,7 @@ int main()
 
 		player.Update(deltaTime,view);
 		HandleCollisions(player, enemyManager);
-		enemyManager.Update();
+		enemyManager.Update(deltaTime);
 		player.Draw(window);
 		enemyManager.DrawEnemies(window);
 		window.display();
