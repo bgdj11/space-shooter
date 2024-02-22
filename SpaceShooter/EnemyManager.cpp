@@ -2,9 +2,9 @@
 
 EnemyManager::EnemyManager()
 {
-	std::shared_ptr<BasicEnemy> enemy1 = std::make_shared<BasicEnemy>(nullptr, sf::Vector2f(130.0f, 130.0f), sf::Vector2f(800.0f, 200.0f));
+	std::shared_ptr<BasicEnemy> enemy1 = std::make_shared<BasicEnemy>(nullptr, sf::Vector2f(50.0f, 50.0f), sf::Vector2f(800.0f, 200.0f));
 	firstWave.push_back(enemy1);
-	std::shared_ptr<BasicEnemy> enemy2 = std::make_shared<BasicEnemy>(nullptr, sf::Vector2f(130.0f, 130.0f), sf::Vector2f(200.0f, 200.0f));
+	std::shared_ptr<BasicEnemy> enemy2 = std::make_shared<BasicEnemy>(nullptr, sf::Vector2f(50.0f, 50.0f), sf::Vector2f(200.0f, 200.0f));
 	firstWave.push_back(enemy2);
 	std::shared_ptr<FirstBoss> boss1 = std::make_shared<FirstBoss>(nullptr, sf::Vector2f(180.0f, 180.0f), sf::Vector2f(500.0f, 150.0f));
 	firstWave.push_back(boss1);

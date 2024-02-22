@@ -88,7 +88,7 @@ int main()
 		window.setView(view);
 
 		sf::RectangleShape background(sf::Vector2f(view.getSize().x, view.getSize().y));
-		background.setFillColor(sf::Color(14, 12, 122));
+		background.setFillColor(sf::Color(19, 15, 41));
 		window.draw(background);
 
 		player.Update(deltaTime,view);

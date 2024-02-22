@@ -7,14 +7,15 @@ BasicEnemy::BasicEnemy(sf::Texture* texture, sf::Vector2f size, sf::Vector2f pos
 	speed = 200.0f;
 
 	body.setSize(size);
-	body.setPosition(position);
-	body.setFillColor(sf::Color::Green);
+	body.setPosition(sf::Vector2f(position.x, position.y - 400.0f));
+	body.setFillColor(sf::Color(94, 5, 2));
 	//body.setTexture(texture);
 	body.setOrigin(body.getSize() / 2.0f);
 
 	basePosition = position;
 	movingLeft = true;
 	accumulatedTime = 0.0f;
+	atPosition = false;
 }
 
 BasicEnemy::~BasicEnemy()
@@ -27,33 +28,44 @@ void BasicEnemy::Update(float deltaTime)
 	
 	accumulatedTime += deltaTime;
 
-	if (movingLeft) 
+	if (!atPosition)
 	{
-		if (body.getPosition().x <= basePosition.x - 100.0f)
-		{
-			movement.x += speed * deltaTime;
-			movingLeft = false;
-		}
-		else
-		{
-			movement.x -= speed * deltaTime;
-		}
+		movement.y += 300.0 * deltaTime;
+
+		body.move(movement);
+
+		if (std::abs(body.getPosition().y - basePosition.y) <= 5.0f)
+			atPosition = true;
 	}
 	else
 	{
-		if (body.getPosition().x >= basePosition.x + 100.0f)
+		if (movingLeft)
 		{
-			movement.x -= speed * deltaTime;
-			movingLeft = true;
+			if (body.getPosition().x <= basePosition.x - 100.0f)
+			{
+				movement.x += speed * deltaTime;
+				movingLeft = false;
+			}
+			else
+			{
+				movement.x -= speed * deltaTime;
+			}
 		}
 		else
 		{
-			movement.x += speed * deltaTime;
+			if (body.getPosition().x >= basePosition.x + 100.0f)
+			{
+				movement.x -= speed * deltaTime;
+				movingLeft = true;
+			}
+			else
+			{
+				movement.x += speed * deltaTime;
+			}
 		}
+
+		// movement.x = 0.5f * sin(accumulatedTime * 0.5f);
+		movement.y = 0.5f * sin(accumulatedTime * 5);
+		body.move(movement);
 	}
-
-	// movement.x = 0.5f * sin(accumulatedTime * 0.5f);
-	movement.y = 0.5f * sin(accumulatedTime * 5);
-
-	body.move(movement);
 }
