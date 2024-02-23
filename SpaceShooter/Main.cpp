@@ -1,6 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include "Player.h"
 #include "EnemyManager.h"
+#include "BigParticleSystem.h"
+#include <memory>
 
 static const float VIEW_WIDTH = 1000.0f;
 static const float VIEW_HEIGHT = 1000.0f;
@@ -47,6 +49,9 @@ void HandleCollisions(Player& player, EnemyManager& enemyManager)
 				if (enemy->GetHealth() <= 0) {
 					enemy->SetStatus(false);
 				}
+
+				std::shared_ptr<BigParticleSystem> explosion = std::make_shared<BigParticleSystem>(10, 2.0f, sf::Color::Red, playerProjectile->GetPosition());
+				player.AddExplosion(explosion);
 			}
 		}
 	}

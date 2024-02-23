@@ -56,10 +56,11 @@ void Player::Update(float deltaTime, sf::View& view)
 		bulletCnt = 5;
 	}
 
-	for (auto& projectile : projectiles) {
+	for (auto& projectile : projectiles) 
+	{
 		projectile->Update(deltaTime);
 		
-		if (projectile->GetPosition() + 100.0f < 0.0f)
+		if (projectile->GetPosition().y + 100.0f < 0.0f)
 			projectile->SetStatus(false);
 	}
 		
@@ -67,12 +68,23 @@ void Player::Update(float deltaTime, sf::View& view)
 		std::remove_if(projectiles.begin(), projectiles.end(),
 			[](const std::shared_ptr<PlayerProjectile>& projectile) {return !projectile->GetStatus();})
 		,projectiles.end());
+
+	// PARTICLE EXPLOSION
+	for (auto& partSys : explosions)
+	{
+		partSys->Update(deltaTime);
+	}
 }
 
 void Player::Draw(sf::RenderWindow& window)
 {
 	for (auto& projectile : projectiles) {
 		projectile->Draw(window);
+	}
+
+	for (auto& partSys : explosions)
+	{
+		partSys->Draw(window, sf::RenderStates());
 	}
 
 	window.draw(body);
@@ -102,4 +114,9 @@ void Player::HandleInput(float deltaTime, sf::Vector2f* movement, float* fireTim
 std::vector<std::shared_ptr<PlayerProjectile>>& Player::GetPlayerProjectiles()
 {
 	return projectiles;
+}
+
+void Player::AddExplosion(std::shared_ptr<BigParticleSystem> particleSystem)
+{
+	explosions.push_back(particleSystem);
 }

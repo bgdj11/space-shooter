@@ -10,7 +10,7 @@ public:
 	~PlayerProjectile();
 
 	void Update(float deltaTime);
-	float GetPosition();
+	sf::Vector2f GetPosition();
 	bool GetStatus() const;
 	void SetStatus(bool status);
 	int GetDamage();

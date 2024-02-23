@@ -38,9 +38,9 @@ void PlayerProjectile::Update(float deltaTime)
 	particleSystem.Update(deltaTime, body.getPosition(), sf::Vector2f(0.0f, speed));
 }
 
-float PlayerProjectile::GetPosition()
+sf::Vector2f PlayerProjectile::GetPosition()
 {
-	return body.getPosition().y;
+	return body.getPosition();
 }
 
 bool PlayerProjectile::GetStatus() const

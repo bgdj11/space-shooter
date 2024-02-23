@@ -4,6 +4,7 @@
 #include "Animator.h"
 #include "GameObject.h"
 #include <memory>
+#include "BigParticleSystem.h"
 
 class Player : public GameObject
 {
@@ -15,6 +16,7 @@ public:
 	void Draw(sf::RenderWindow& window) override;
 	void HandleInput(float deltaTime, sf::Vector2f* movement, float* fireTimer, int* bulletCnt);
 	std::vector<std::shared_ptr<PlayerProjectile>>& GetPlayerProjectiles();
+	void AddExplosion(std::shared_ptr<BigParticleSystem> particleSystem);
 
 private:
 	float speed;
@@ -26,6 +28,7 @@ private:
 	float fireCooldown;
 	int bulletCnt;
 	Animator animator;
+	std::vector<std::shared_ptr<BigParticleSystem>> explosions;
 };
 
 
