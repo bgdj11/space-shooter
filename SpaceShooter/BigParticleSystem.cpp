@@ -3,12 +3,12 @@
 BigParticleSystem::BigParticleSystem(int count, float particleLifeTime, sf::Color color, sf::Vector2f position)
 {
     this->particleLifeTime = particleLifeTime;
-    sizeDecreaseRate = 1;  // promeni posle
+    sizeDecreaseRate = 3.0f; 
 
     for (int i = 0; i < count; i++)
     {
         sf::Vector2f velocity(rand() % 100 - 50, rand() % 100 - 50);
-        AddParticle(position, velocity, color, 5.0f);
+        AddParticle(position, velocity, color, 6.0f);
     }
 }
 
@@ -33,12 +33,15 @@ void BigParticleSystem::Update(float dt)
     for (auto& particle : particles) {
         particle.position += particle.velocity * dt;
         particle.lifeTime -= dt;
-        particle.size = std::max(particle.size - dt * sizeDecreaseRate, 0.0f);
+        particle.size = std::max(particle.size - dt * sizeDecreaseRate, 0.5f);
 
         particles.erase(std::remove_if(particles.begin(), particles.end(),
             [](const BigParticle& p) { return p.lifeTime <= 0; }),
             particles.end());
     }
+
+    if (particles.empty())
+        status = false;
 }
 
 void BigParticleSystem::Draw(sf::RenderTarget& target, sf::RenderStates states)
@@ -53,4 +56,9 @@ void BigParticleSystem::Draw(sf::RenderTarget& target, sf::RenderStates states)
         target.draw(circle, states);
     }
 
+}
+
+bool BigParticleSystem::GetStatus()
+{
+    return status;
 }

@@ -74,6 +74,11 @@ void Player::Update(float deltaTime, sf::View& view)
 	{
 		partSys->Update(deltaTime);
 	}
+
+	explosions.erase(
+		std::remove_if(explosions.begin(), explosions.end(),
+			[](const std::shared_ptr<BigParticleSystem>& bigParticle) {return !bigParticle->GetStatus(); })
+		, explosions.end());
 }
 
 void Player::Draw(sf::RenderWindow& window)
