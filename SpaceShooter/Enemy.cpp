@@ -24,3 +24,8 @@ void Enemy::Update(float deltaTime)
 {
 }
 
+sf::Vector2f Enemy::GetPosition()
+{
+	return body.getPosition();
+}
+

@@ -1,4 +1,5 @@
 #include "EnemyManager.h"
+#include <iostream>
 
 EnemyManager::EnemyManager()
 {
@@ -26,6 +27,11 @@ void EnemyManager::DrawEnemies(sf::RenderWindow& window)
 	{
 		enemy->Draw(window);
 	}
+
+	for (auto& partSys : explosions)
+	{
+		partSys->Draw(window, sf::RenderStates());
+	}
 }
 
 void EnemyManager::Update(float deltaTime)
@@ -39,4 +45,20 @@ void EnemyManager::Update(float deltaTime)
 	{
 		enemy->Update(deltaTime);
 	}
+
+	// PARTICLE EXPLOSION
+	for (auto& partSys : explosions)
+	{
+		partSys->Update(deltaTime);
+	}
+
+	explosions.erase(
+		std::remove_if(explosions.begin(), explosions.end(),
+			[](const std::shared_ptr<BigParticleSystem>& bigParticle) {return !bigParticle->GetStatus(); })
+		, explosions.end());
+}
+
+void EnemyManager::AddExplosion(std::shared_ptr<BigParticleSystem> particleSystem)
+{
+	explosions.push_back(particleSystem);
 }

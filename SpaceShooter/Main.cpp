@@ -47,10 +47,13 @@ void HandleCollisions(Player& player, EnemyManager& enemyManager)
 				playerProjectile->SetStatus(false);
 				enemy->TakeDamage(playerProjectile->GetDamage());
 				if (enemy->GetHealth() <= 0) {
+					// enemy death
 					enemy->SetStatus(false);
+					std::shared_ptr<BigParticleSystem> explosion = std::make_shared<BigParticleSystem>(80, 2.0f, sf::Color(252, 3, 3), enemy->GetPosition(), 5.0f, 8.0f, 2.5f);
+					enemyManager.AddExplosion(explosion);
 				}
 
-				std::shared_ptr<BigParticleSystem> explosion = std::make_shared<BigParticleSystem>(12, 2.0f, sf::Color(252, 186, 3), playerProjectile->GetPosition());
+				std::shared_ptr<BigParticleSystem> explosion = std::make_shared<BigParticleSystem>(12, 2.0f, sf::Color(252, 186, 3), playerProjectile->GetPosition(), 3.0f, 6.0f, 1.0f);
 				player.AddExplosion(explosion);
 			}
 		}

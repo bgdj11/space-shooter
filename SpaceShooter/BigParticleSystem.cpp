@@ -1,14 +1,15 @@
 #include "BigParticleSystem.h"
 
-BigParticleSystem::BigParticleSystem(int count, float particleLifeTime, sf::Color color, sf::Vector2f position)
+BigParticleSystem::BigParticleSystem(int count, float particleLifeTime, sf::Color color, sf::Vector2f position,
+    float sizeDecrease, float size, float velocityCoef)
 {
     this->particleLifeTime = particleLifeTime;
-    sizeDecreaseRate = 3.0f; 
+    this->sizeDecreaseRate = sizeDecrease;
 
     for (int i = 0; i < count; i++)
     {
         sf::Vector2f velocity(rand() % 100 - 50, rand() % 100 - 50);
-        AddParticle(position, velocity, color, 6.0f);
+        AddParticle(position, velocity * velocityCoef, color, size);
     }
 }
 
@@ -34,6 +35,12 @@ void BigParticleSystem::Update(float dt)
         particle.position += particle.velocity * dt;
         particle.lifeTime -= dt;
         particle.size = std::max(particle.size - dt * sizeDecreaseRate, 0.5f);
+
+        if (particle.color.g + 5 <= 255) 
+            particle.color.g += 5; 
+        else 
+            particle.color.g = 255;
+        
 
         particles.erase(std::remove_if(particles.begin(), particles.end(),
             [](const BigParticle& p) { return p.lifeTime <= 0; }),

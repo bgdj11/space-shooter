@@ -8,7 +8,7 @@ BasicEnemy::BasicEnemy(sf::Texture* texture, sf::Vector2f size, sf::Vector2f pos
 
 	body.setSize(size);
 	body.setPosition(sf::Vector2f(position.x, position.y - 400.0f));
-	body.setFillColor(sf::Color(94, 5, 2));
+	body.setFillColor(sf::Color(3, 252, 132));
 	//body.setTexture(texture);
 	body.setOrigin(body.getSize() / 2.0f);
 
@@ -34,7 +34,7 @@ void BasicEnemy::Update(float deltaTime)
 
 		body.move(movement);
 
-		if (std::abs(body.getPosition().y - basePosition.y) <= 5.0f)
+		if (std::abs(body.getPosition().y - basePosition.y) <= 10.0f)
 			atPosition = true;
 	}
 	else

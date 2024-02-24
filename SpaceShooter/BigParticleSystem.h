@@ -18,7 +18,8 @@ private:
     bool status;
 
 public:
-    BigParticleSystem(int count, float particleLifeTime, sf::Color color, sf::Vector2f position);
+    BigParticleSystem(int count, float particleLifeTime, sf::Color color, sf::Vector2f position, float sizeDecrease,
+        float size, float velocityCoef);
     ~BigParticleSystem();
 
     void AddParticle(const sf::Vector2f& position, const sf::Vector2f& velocity, sf::Color color, float size);

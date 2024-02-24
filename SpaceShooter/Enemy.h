@@ -16,5 +16,6 @@ public:
 	void SetStatus(bool status);
 	bool GetStatus();
 	virtual void Update(float deltaTime);
+	sf::Vector2f GetPosition();
 };
 
