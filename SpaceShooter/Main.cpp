@@ -3,6 +3,7 @@
 #include "EnemyManager.h"
 #include "BigParticleSystem.h"
 #include <memory>
+#include "SpriteManager.h"
 
 static const float VIEW_WIDTH = 1000.0f;
 static const float VIEW_HEIGHT = 1000.0f;
@@ -49,7 +50,7 @@ void HandleCollisions(Player& player, EnemyManager& enemyManager)
 				if (enemy->GetHealth() <= 0) {
 					// enemy death
 					enemy->SetStatus(false);
-					std::shared_ptr<BigParticleSystem> explosion = std::make_shared<BigParticleSystem>(80, 2.0f, sf::Color(252, 3, 3), enemy->GetPosition(), 5.0f, 8.0f, 2.5f);
+					std::shared_ptr<BigParticleSystem> explosion = std::make_shared<BigParticleSystem>(80, 2.0f, sf::Color(0, 0, 255), enemy->GetPosition(), 3.0f, 10.0f, 2.5f);
 					enemyManager.AddExplosion(explosion);
 				}
 
@@ -65,12 +66,14 @@ int main()
     sf::RenderWindow window(sf::VideoMode(1000.0f, 1000.0f), "Space Shooter", sf::Style::Close | sf::Style::Resize);
 	sf::View view(sf::FloatRect(0, 0, VIEW_WIDTH, VIEW_HEIGHT));
 
+	SpriteManager spriteManager;
+
     sf::Texture playerTexture;
-    playerTexture.loadFromFile("../sprites/Engine_Ss_png.png");
+	playerTexture = spriteManager.GetTexture("../sprites/Engine_Ss_png.png");
 	sf::Texture playerProjectileTexture;
-	playerProjectileTexture.loadFromFile("../sprites/bullet.png");
+	playerProjectileTexture = spriteManager.GetTexture("../sprites/rocket.png");
 	sf::Texture enemyTexture;
-	enemyTexture.loadFromFile("../sprites/ship_removed.png");
+	//enemyTexture.loadFromFile("../sprites/ship_removed.png");
 
 	Player player(&playerTexture, &playerProjectileTexture, 600.f, view, sf::Vector2u(4, 1), 0.1f);
 	EnemyManager enemyManager;
