@@ -12,8 +12,8 @@ Rock::Rock(sf::Texture* texture, sf::Vector2f size)
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::uniform_real_distribution<float> distrx(30.0f, 970.0f);
-	std::uniform_real_distribution<float> distry(-5000.0f, -300.0f);
-	std::uniform_real_distribution<float> distr(10.0, 40.0f);
+	std::uniform_real_distribution<float> distry(-8000.0f, -600.0f);
+	std::uniform_real_distribution<float> distr(10.0, 60.0f);
 
 	rotationSpeed = distr(gen);
 
@@ -21,6 +21,10 @@ Rock::Rock(sf::Texture* texture, sf::Vector2f size)
 	body.setPosition(sf::Vector2f(distrx(gen), distry(gen)));
 	body.setTexture(texture);
 	body.setOrigin(body.getSize() / 2.0f);
+
+	collisionBox.setSize(sf::Vector2f(body.getSize().x * 0.8f, body.getSize().y * 0.8f));
+	collisionBox.setOrigin(collisionBox.getSize() / 2.0f);
+	collisionBox.setPosition(body.getPosition());
 }
 
 Rock::~Rock()
@@ -34,4 +38,5 @@ void Rock::Update(float deltaTime)
 
 	body.rotate(rotationSpeed * deltaTime);
 	body.move(movement);
+	collisionBox.move(movement);
 }

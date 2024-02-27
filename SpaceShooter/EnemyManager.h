@@ -13,16 +13,19 @@ private:
 	std::vector<std::shared_ptr<Enemy>> firstWave;
 	std::vector<std::shared_ptr<BigParticleSystem>> explosions;
 	std::vector<std::shared_ptr<Enemy>> rocks;
+	unsigned int activeWave;
 
 public:
 	EnemyManager(SpriteManager* spriteManager);
 	~EnemyManager();
 
 	std::vector<std::shared_ptr<Enemy>>& GetFirstWave();
+	std::vector<std::shared_ptr<Enemy>>& GetSecondWawe();
 	void DrawEnemies(sf::RenderWindow& window);
 	void Update(float deltaTime, sf::RenderWindow& window);
 	void AddExplosion(std::shared_ptr<BigParticleSystem> particleSystem);
 	void CreateRocks(SpriteManager* spriteManager);
+	unsigned int GetActiveWave();
 
 };
 

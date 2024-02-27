@@ -37,12 +37,6 @@ void BigParticleSystem::Update(float dt)
         particle.lifeTime -= dt;
         particle.size = std::max(particle.size - dt * sizeDecreaseRate, 0.5f);
 
-        if (particle.color.g + 2 <= 255) 
-            particle.color.g += 2; 
-        else 
-            particle.color.g = 255;
-        
-
         particles.erase(std::remove_if(particles.begin(), particles.end(),
             [](const BigParticle& p) { return p.lifeTime <= 0; }),
             particles.end());

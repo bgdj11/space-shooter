@@ -4,6 +4,7 @@
 #include "BigParticleSystem.h"
 #include <memory>
 #include "SpriteManager.h"
+#include <iostream>
 
 static const float VIEW_WIDTH = 1000.0f;
 static const float VIEW_HEIGHT = 1000.0f;
@@ -41,21 +42,60 @@ void HandleCollisions(Player& player, EnemyManager& enemyManager)
 {
 	for (auto& playerProjectile: player.GetPlayerProjectiles())
 	{
-		for (auto& enemy : enemyManager.GetFirstWave())
+		if (enemyManager.GetActiveWave() == 1) 
 		{
-			if (enemy->GetCollider().CheckCollision(playerProjectile->GetCollider()))
+			for (auto& enemy : enemyManager.GetFirstWave())
 			{
-				playerProjectile->SetStatus(false);
-				enemy->TakeDamage(playerProjectile->GetDamage());
-				if (enemy->GetHealth() <= 0) {
-					// enemy death
-					enemy->SetStatus(false);
-					std::shared_ptr<BigParticleSystem> explosion = std::make_shared<BigParticleSystem>(80, 2.0f, sf::Color(0, 0, 255), enemy->GetPosition(), 3.0f, 10.0f, 2.5f);
-					enemyManager.AddExplosion(explosion);
-				}
+				if (enemy->GetCollider().CheckCollision(playerProjectile->GetCollider()))
+				{
+					playerProjectile->SetStatus(false);
+					enemy->TakeDamage(playerProjectile->GetDamage());
+					if (enemy->GetHealth() <= 0) {
+						// enemy death
+						enemy->SetStatus(false);
+						std::shared_ptr<BigParticleSystem> explosion = std::make_shared<BigParticleSystem>(80, 2.0f, sf::Color(0, 0, 255), enemy->GetPosition(), 3.0f, 10.0f, 2.5f);
+						enemyManager.AddExplosion(explosion);
+					}
 
-				std::shared_ptr<BigParticleSystem> explosion = std::make_shared<BigParticleSystem>(12, 2.0f, sf::Color(252, 186, 3), playerProjectile->GetPosition(), 3.0f, 6.0f, 1.0f);
-				player.AddExplosion(explosion);
+					std::shared_ptr<BigParticleSystem> explosion = std::make_shared<BigParticleSystem>(12, 2.0f, sf::Color(252, 186, 3), playerProjectile->GetPosition(), 3.0f, 6.0f, 1.0f);
+					player.AddExplosion(explosion);
+				}
+			}
+		}
+		else if (enemyManager.GetActiveWave() == 2)
+		{
+			for (auto& enemy : enemyManager.GetSecondWawe())
+			{
+				if (enemy->GetCollider().CheckCollision(playerProjectile->GetCollider()))
+				{
+					playerProjectile->SetStatus(false);
+					enemy->TakeDamage(playerProjectile->GetDamage());
+					if (enemy->GetHealth() <= 0) {
+						enemy->SetStatus(false);
+						std::shared_ptr<BigParticleSystem> explosion = std::make_shared<BigParticleSystem>(60, 2.0f, sf::Color(179, 138, 73), enemy->GetPosition(), 3.0f, 15.0f, 2.0f);
+						enemyManager.AddExplosion(explosion);
+					}
+
+					std::shared_ptr<BigParticleSystem> explosion = std::make_shared<BigParticleSystem>(12, 2.0f, sf::Color(240, 0, 0), playerProjectile->GetPosition(), 3.0f, 6.0f, 1.0f);
+					player.AddExplosion(explosion);
+				}
+			}
+		}
+	}
+
+	if (enemyManager.GetActiveWave() == 2)
+	{
+		for (auto& enemy : enemyManager.GetSecondWawe())
+		{
+			if (enemy->GetCollider().CheckCollision(player.GetCollider()))
+			{
+				player.TakeDamage(enemy->GetDamage());
+				enemy->SetStatus(false);
+				std::shared_ptr<BigParticleSystem> explosion = std::make_shared<BigParticleSystem>(60, 2.0f, sf::Color(186, 163, 123), enemy->GetPosition(), 3.0f, 15.0f, 2.0f);
+				enemyManager.AddExplosion(explosion);
+
+				if (player.GetHealth() <= 0)
+					std::cout << "GAME OVER !!!" << std::endl;
 			}
 		}
 	}
@@ -97,7 +137,7 @@ int main()
 		window.setView(view);
 
 		sf::RectangleShape background(sf::Vector2f(view.getSize().x, view.getSize().y));
-		background.setFillColor(sf::Color(19, 15, 41));
+		background.setFillColor(sf::Color(5, 19, 54));
 		window.draw(background);
 
 		player.Update(deltaTime,view);

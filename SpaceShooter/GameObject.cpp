@@ -15,5 +15,5 @@ void GameObject::Draw(sf::RenderWindow& window)
 
 Collider GameObject::GetCollider()
 {
-	return Collider(body); // put back collisionBox later
+	return Collider(collisionBox); 
 }

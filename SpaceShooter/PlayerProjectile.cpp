@@ -11,6 +11,10 @@ PlayerProjectile::PlayerProjectile(sf::Texture* texture, sf::Vector2f position, 
 	body.setTexture(texture);
 	body.setPosition(position);
 
+	collisionBox.setSize(sf::Vector2f(body.getSize().x, body.getSize().y * 0.9f));
+	collisionBox.setOrigin(collisionBox.getSize() / 2.0f);
+	collisionBox.setPosition(body.getPosition());
+
 	damage = 1;
 
 	// PARTICLE SYSTEM
@@ -29,6 +33,7 @@ void PlayerProjectile::Update(float deltaTime)
 	sf::Vector2f movement(0.0f, 0.0f);
 	movement.y -= speed * deltaTime;
 	body.move(movement);
+	collisionBox.move(movement);
 	
 	for (int i = 0; i < 2; i++) {
 		sf::Vector2f velocity((rand() % 100 - 50) * 2, rand() % 100 - 50);

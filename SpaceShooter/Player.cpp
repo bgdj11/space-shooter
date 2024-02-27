@@ -10,11 +10,16 @@ Player::Player(sf::Texture* texture, sf::Texture* projectileTexture, float speed
 	fireTimer = 0.0f;
 	fireCooldown = 3.0f;
 	bulletCnt = 5;
+	health = 2;
 
 	body.setSize(sf::Vector2f(texture->getSize().x / imageCount.x / 2.5f, texture->getSize().y / 2.5f));
 	body.setOrigin(body.getSize() / 2.0f);
 	body.setTexture(texture);
 	body.setPosition(view.getSize().x / 2.0f, view.getSize().y - 100.0f);
+
+	collisionBox.setSize(sf::Vector2f(body.getSize().x * 0.4f, body.getSize().y * 0.3f));
+	collisionBox.setOrigin(sf::Vector2f(collisionBox.getSize().x / 2.0f, collisionBox.getSize().y / 2.0f + 30.0f));
+	collisionBox.setPosition(body.getPosition());
 
 	this->projectileTexture = projectileTexture;
 }
@@ -47,6 +52,8 @@ void Player::Update(float deltaTime, sf::View& view)
 		body.setPosition(view.getSize().x, body.getPosition().y);
 	if (body.getPosition().x > view.getSize().x)
 		body.setPosition(0.0f, body.getPosition().y);
+
+	collisionBox.setPosition(body.getPosition());
 
 	// PROJECTILES
 	fireTimer += deltaTime;
@@ -124,4 +131,14 @@ std::vector<std::shared_ptr<PlayerProjectile>>& Player::GetPlayerProjectiles()
 void Player::AddExplosion(std::shared_ptr<BigParticleSystem> particleSystem)
 {
 	explosions.push_back(particleSystem);
+}
+
+void Player::TakeDamage(int damage)
+{
+	health -= damage;
+}
+
+int Player::GetHealth()
+{
+	return health;
 }

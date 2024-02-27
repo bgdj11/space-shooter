@@ -13,6 +13,10 @@ BasicEnemy::BasicEnemy(sf::Texture* texture, sf::Vector2f size, sf::Vector2f pos
 	//body.setTexture(texture);
 	body.setOrigin(body.getSize() / 2.0f);
 
+	collisionBox.setSize(sf::Vector2f(body.getSize().x * 0.8f, body.getSize().y * 0.8f));
+	collisionBox.setOrigin(collisionBox.getSize() / 2.0f);
+	collisionBox.setPosition(body.getPosition());
+
 	basePosition = position;
 	movingLeft = true;
 	accumulatedTime = 0.0f;
@@ -34,6 +38,7 @@ void BasicEnemy::Update(float deltaTime)
 		movement.y += 300.0f * deltaTime;
 
 		body.move(movement);
+		collisionBox.move(movement);
 
 		if (std::abs(body.getPosition().y - basePosition.y) <= 10.0f)
 			atPosition = true;
@@ -68,5 +73,6 @@ void BasicEnemy::Update(float deltaTime)
 		// movement.x = 0.5f * sin(accumulatedTime * 0.5f);
 		movement.y = 0.5f * sin(accumulatedTime * 5);
 		body.move(movement);
+		collisionBox.move(movement);
 	}
 }

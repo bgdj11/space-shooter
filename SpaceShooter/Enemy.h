@@ -5,13 +5,14 @@ class Enemy : public GameObject
 {
 protected:
     int health;
-	unsigned int damage;
+	int damage;
 	bool status;
 	float speed;
 	sf::Vector2f basePosition;
 	
 public:
 	void TakeDamage(int damage);
+	int GetDamage();
 	int GetHealth();
 	void SetStatus(bool status);
 	bool GetStatus();

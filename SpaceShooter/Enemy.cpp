@@ -10,6 +10,11 @@ int Enemy::GetHealth()
 	return health;
 }
 
+int Enemy::GetDamage()
+{
+	return damage;
+}
+
 void Enemy::SetStatus(bool status)
 {
 	this->status = status;

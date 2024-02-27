@@ -3,13 +3,15 @@
 EnemyManager::EnemyManager(SpriteManager* spriteManager)
 {
 	std::shared_ptr<BasicEnemy> enemy1 = std::make_shared<BasicEnemy>(nullptr, sf::Vector2f(50.0f, 50.0f), sf::Vector2f(800.0f, 200.0f));
-	firstWave.push_back(enemy1);
+	//firstWave.push_back(enemy1);
 	std::shared_ptr<BasicEnemy> enemy2 = std::make_shared<BasicEnemy>(nullptr, sf::Vector2f(50.0f, 50.0f), sf::Vector2f(200.0f, 200.0f));
-	firstWave.push_back(enemy2);
+	//firstWave.push_back(enemy2);
 	std::shared_ptr<FirstBoss> boss1 = std::make_shared<FirstBoss>(nullptr, sf::Vector2f(180.0f, 180.0f), sf::Vector2f(500.0f, 150.0f));
 	firstWave.push_back(boss1);
 
 	CreateRocks(spriteManager);
+
+	activeWave = 1;
 }
 
 EnemyManager::~EnemyManager()
@@ -19,6 +21,11 @@ EnemyManager::~EnemyManager()
 std::vector<std::shared_ptr<Enemy>>& EnemyManager::GetFirstWave()
 {
 	return firstWave;
+}
+
+std::vector<std::shared_ptr<Enemy>>& EnemyManager::GetSecondWawe()
+{
+	return rocks;
 }
 
 void EnemyManager::DrawEnemies(sf::RenderWindow& window)
@@ -60,11 +67,13 @@ void EnemyManager::Update(float deltaTime, sf::RenderWindow& window)
 	}
 	else
 	{
+		activeWave = 2;
+
 		for (auto& enemy : rocks)
 		{
 			enemy->Update(deltaTime);
 
-			if (enemy->GetPosition().y - 100.0f > window.getSize().y)
+			if (enemy->GetPosition().y - 500.0f > window.getSize().y)
 				enemy->SetStatus(false);
 		}
 		
@@ -109,6 +118,12 @@ void EnemyManager::CreateRocks(SpriteManager* spriteManager)
 	std::shared_ptr<Rock> rock1_7 = std::make_shared<Rock>(&rock1Texture, sf::Vector2f(72.0, 66.0));
 	std::shared_ptr<Rock> rock1_8 = std::make_shared<Rock>(&rock1Texture, sf::Vector2f(72.0, 66.0));
 	std::shared_ptr<Rock> rock1_9 = std::make_shared<Rock>(&rock1Texture, sf::Vector2f(72.0, 66.0));
+	std::shared_ptr<Rock> rock1_10 = std::make_shared<Rock>(&rock1Texture, sf::Vector2f(72.0, 66.0));
+	std::shared_ptr<Rock> rock1_11 = std::make_shared<Rock>(&rock1Texture, sf::Vector2f(72.0, 66.0));
+	std::shared_ptr<Rock> rock1_12 = std::make_shared<Rock>(&rock1Texture, sf::Vector2f(72.0, 66.0));
+	std::shared_ptr<Rock> rock1_13 = std::make_shared<Rock>(&rock1Texture, sf::Vector2f(72.0, 66.0));
+	std::shared_ptr<Rock> rock1_14 = std::make_shared<Rock>(&rock1Texture, sf::Vector2f(72.0, 66.0));
+	std::shared_ptr<Rock> rock1_15 = std::make_shared<Rock>(&rock1Texture, sf::Vector2f(72.0, 66.0));
 	rocks.push_back(rock1_1);
 	rocks.push_back(rock1_2);
 	rocks.push_back(rock1_3);
@@ -118,6 +133,12 @@ void EnemyManager::CreateRocks(SpriteManager* spriteManager)
 	rocks.push_back(rock1_7);
 	rocks.push_back(rock1_8);
 	rocks.push_back(rock1_9);
+	rocks.push_back(rock1_10);
+	rocks.push_back(rock1_11);
+	rocks.push_back(rock1_12);
+	rocks.push_back(rock1_13);
+	rocks.push_back(rock1_14);
+	rocks.push_back(rock1_15);
 	std::shared_ptr<Rock> rock2_1 = std::make_shared<Rock>(&rock2Texture, sf::Vector2f(66.0, 72.0));
 	std::shared_ptr<Rock> rock2_2 = std::make_shared<Rock>(&rock2Texture, sf::Vector2f(66.0, 72.0));
 	std::shared_ptr<Rock> rock2_3 = std::make_shared<Rock>(&rock2Texture, sf::Vector2f(66.0, 72.0));
@@ -127,6 +148,12 @@ void EnemyManager::CreateRocks(SpriteManager* spriteManager)
 	std::shared_ptr<Rock> rock2_7 = std::make_shared<Rock>(&rock2Texture, sf::Vector2f(66.0, 72.0));
 	std::shared_ptr<Rock> rock2_8 = std::make_shared<Rock>(&rock2Texture, sf::Vector2f(66.0, 72.0));
 	std::shared_ptr<Rock> rock2_9 = std::make_shared<Rock>(&rock2Texture, sf::Vector2f(66.0, 72.0));
+	std::shared_ptr<Rock> rock2_10 = std::make_shared<Rock>(&rock2Texture, sf::Vector2f(66.0, 72.0));
+	std::shared_ptr<Rock> rock2_11 = std::make_shared<Rock>(&rock2Texture, sf::Vector2f(66.0, 72.0));
+	std::shared_ptr<Rock> rock2_12 = std::make_shared<Rock>(&rock2Texture, sf::Vector2f(66.0, 72.0));
+	std::shared_ptr<Rock> rock2_13 = std::make_shared<Rock>(&rock2Texture, sf::Vector2f(66.0, 72.0));
+	std::shared_ptr<Rock> rock2_14 = std::make_shared<Rock>(&rock2Texture, sf::Vector2f(66.0, 72.0));
+	std::shared_ptr<Rock> rock2_15 = std::make_shared<Rock>(&rock2Texture, sf::Vector2f(66.0, 72.0));
 	rocks.push_back(rock2_1);
 	rocks.push_back(rock2_2);
 	rocks.push_back(rock2_3);
@@ -136,40 +163,79 @@ void EnemyManager::CreateRocks(SpriteManager* spriteManager)
 	rocks.push_back(rock2_7);
 	rocks.push_back(rock2_8);
 	rocks.push_back(rock2_9);
+	rocks.push_back(rock2_10);
+	rocks.push_back(rock2_11);
+	rocks.push_back(rock2_12);
+	rocks.push_back(rock2_13);
+	rocks.push_back(rock2_14);
+	rocks.push_back(rock2_15);
 	std::shared_ptr<Rock> rock3_1 = std::make_shared<Rock>(&rock3Texture, sf::Vector2f(115.0, 111.0));
 	std::shared_ptr<Rock> rock3_2 = std::make_shared<Rock>(&rock3Texture, sf::Vector2f(115.0, 111.0));
 	std::shared_ptr<Rock> rock3_3 = std::make_shared<Rock>(&rock3Texture, sf::Vector2f(115.0, 111.0));
 	std::shared_ptr<Rock> rock3_4 = std::make_shared<Rock>(&rock3Texture, sf::Vector2f(115.0, 111.0));
 	std::shared_ptr<Rock> rock3_5 = std::make_shared<Rock>(&rock3Texture, sf::Vector2f(115.0, 111.0));
 	std::shared_ptr<Rock> rock3_6 = std::make_shared<Rock>(&rock3Texture, sf::Vector2f(115.0, 111.0));
+	std::shared_ptr<Rock> rock3_7 = std::make_shared<Rock>(&rock3Texture, sf::Vector2f(115.0, 111.0));
+	std::shared_ptr<Rock> rock3_8 = std::make_shared<Rock>(&rock3Texture, sf::Vector2f(115.0, 111.0));
+	std::shared_ptr<Rock> rock3_9 = std::make_shared<Rock>(&rock3Texture, sf::Vector2f(115.0, 111.0));
+	std::shared_ptr<Rock> rock3_10 = std::make_shared<Rock>(&rock3Texture, sf::Vector2f(115.0, 111.0));
+	std::shared_ptr<Rock> rock3_11 = std::make_shared<Rock>(&rock3Texture, sf::Vector2f(115.0, 111.0));
+	std::shared_ptr<Rock> rock3_12 = std::make_shared<Rock>(&rock3Texture, sf::Vector2f(115.0, 111.0));
 	rocks.push_back(rock3_1);
 	rocks.push_back(rock3_2);
 	rocks.push_back(rock3_3);
 	rocks.push_back(rock3_4);
 	rocks.push_back(rock3_5);
 	rocks.push_back(rock3_6);
+	rocks.push_back(rock3_7);
+	rocks.push_back(rock3_8);
+	rocks.push_back(rock3_9);
+	rocks.push_back(rock3_10);
+	rocks.push_back(rock3_11);
+	rocks.push_back(rock3_12);
 	std::shared_ptr<Rock> rock4_1 = std::make_shared<Rock>(&rock4Texture, sf::Vector2f(152.0, 146.0));
 	std::shared_ptr<Rock> rock4_2 = std::make_shared<Rock>(&rock4Texture, sf::Vector2f(152.0, 146.0));
 	std::shared_ptr<Rock> rock4_3 = std::make_shared<Rock>(&rock4Texture, sf::Vector2f(152.0, 146.0));
 	std::shared_ptr<Rock> rock4_4 = std::make_shared<Rock>(&rock4Texture, sf::Vector2f(152.0, 146.0));
 	std::shared_ptr<Rock> rock4_5 = std::make_shared<Rock>(&rock4Texture, sf::Vector2f(152.0, 146.0));
 	std::shared_ptr<Rock> rock4_6 = std::make_shared<Rock>(&rock4Texture, sf::Vector2f(152.0, 146.0));
+	std::shared_ptr<Rock> rock4_7 = std::make_shared<Rock>(&rock4Texture, sf::Vector2f(152.0, 146.0));
+	std::shared_ptr<Rock> rock4_8 = std::make_shared<Rock>(&rock4Texture, sf::Vector2f(152.0, 146.0));
+	std::shared_ptr<Rock> rock4_9 = std::make_shared<Rock>(&rock4Texture, sf::Vector2f(152.0, 146.0));
+	std::shared_ptr<Rock> rock4_10 = std::make_shared<Rock>(&rock4Texture, sf::Vector2f(152.0, 146.0));
 	rocks.push_back(rock4_1);
 	rocks.push_back(rock4_2);
 	rocks.push_back(rock4_3);
 	rocks.push_back(rock4_4);
 	rocks.push_back(rock4_5);
 	rocks.push_back(rock4_6);
+	rocks.push_back(rock4_7);
+	rocks.push_back(rock4_8);
+	rocks.push_back(rock4_9);
+	rocks.push_back(rock4_10);
 	std::shared_ptr<Rock> rock5_1 = std::make_shared<Rock>(&rock5Texture, sf::Vector2f(173.0, 132.0));
 	std::shared_ptr<Rock> rock5_2 = std::make_shared<Rock>(&rock5Texture, sf::Vector2f(173.0, 132.0));
 	std::shared_ptr<Rock> rock5_3 = std::make_shared<Rock>(&rock5Texture, sf::Vector2f(173.0, 132.0));
 	std::shared_ptr<Rock> rock5_4 = std::make_shared<Rock>(&rock5Texture, sf::Vector2f(173.0, 132.0));
 	std::shared_ptr<Rock> rock5_5 = std::make_shared<Rock>(&rock5Texture, sf::Vector2f(173.0, 132.0));
 	std::shared_ptr<Rock> rock5_6 = std::make_shared<Rock>(&rock5Texture, sf::Vector2f(173.0, 132.0));
+	std::shared_ptr<Rock> rock5_7 = std::make_shared<Rock>(&rock5Texture, sf::Vector2f(173.0, 132.0));
+	std::shared_ptr<Rock> rock5_8 = std::make_shared<Rock>(&rock5Texture, sf::Vector2f(173.0, 132.0));
+	std::shared_ptr<Rock> rock5_9 = std::make_shared<Rock>(&rock5Texture, sf::Vector2f(173.0, 132.0));
+	std::shared_ptr<Rock> rock5_10 = std::make_shared<Rock>(&rock5Texture, sf::Vector2f(173.0, 132.0));
 	rocks.push_back(rock5_1);
 	rocks.push_back(rock5_2);
 	rocks.push_back(rock5_3);
 	rocks.push_back(rock5_4);
 	rocks.push_back(rock5_5);
 	rocks.push_back(rock5_6);
+	rocks.push_back(rock5_7);
+	rocks.push_back(rock5_8);
+	rocks.push_back(rock5_9);
+	rocks.push_back(rock5_10);
+}
+
+unsigned int EnemyManager::GetActiveWave()
+{
+	return activeWave;
 }

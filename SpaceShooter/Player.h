@@ -17,8 +17,11 @@ public:
 	void HandleInput(float deltaTime, sf::Vector2f* movement, float* fireTimer, int* bulletCnt);
 	std::vector<std::shared_ptr<PlayerProjectile>>& GetPlayerProjectiles();
 	void AddExplosion(std::shared_ptr<BigParticleSystem> particleSystem);
+	void TakeDamage(int damage);
+	int GetHealth();
 
 private:
+	int health;
 	float speed;
 	float rotation;
 	std::vector<std::shared_ptr<PlayerProjectile>> projectiles;
