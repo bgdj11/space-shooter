@@ -16,24 +16,24 @@ void ResizeView(const sf::RenderWindow& window, sf::View& view)
 	if (aspectRatio > gameAspectRatio) 
 	{
 		// Window is wider then needed
-		sf::Vector2f newSize(gameAspectRatio * window.getSize().y, window.getSize().y);
+		sf::Vector2f newSize(gameAspectRatio * (float)window.getSize().y, (float)window.getSize().y);
 		view.setSize(newSize);
 		view.setCenter(newSize.x / 2, newSize.y / 2);
 
-		sf::Vector2f newPosition((window.getSize().x - newSize.x) / 2.0f, 0.0f);
-		view.setViewport(sf::FloatRect(newPosition.x / window.getSize().x, newPosition.y / window.getSize().y,
-			newSize.x / window.getSize().x, newSize.y / window.getSize().y));
+		sf::Vector2f newPosition(((float)window.getSize().x - newSize.x) / 2.0f, 0.0f);
+		view.setViewport(sf::FloatRect(newPosition.x / (float)window.getSize().x, newPosition.y / (float)window.getSize().y,
+			newSize.x / (float)window.getSize().x, newSize.y / (float)window.getSize().y));
 	}
 	else
 	{
 		// Window is narrower than needed
-		sf::Vector2f newSize(window.getSize().x, window.getSize().x / gameAspectRatio);
+		sf::Vector2f newSize((float)window.getSize().x, (float)window.getSize().x / gameAspectRatio);
 		view.setSize(newSize);
 		view.setCenter(newSize.x / 2, newSize.y / 2);
 
-		sf::Vector2f newPosition(0.0f, (window.getSize().y - newSize.y) / 2.0f);
-		view.setViewport(sf::FloatRect(newPosition.x / window.getSize().x, newPosition.y / window.getSize().y,
-			newSize.x / window.getSize().x, newSize.y / window.getSize().y));
+		sf::Vector2f newPosition(0.0f, ((float)window.getSize().y - newSize.y) / 2.0f);
+		view.setViewport(sf::FloatRect(newPosition.x / (float)window.getSize().x, newPosition.y / (float)window.getSize().y,
+			newSize.x / (float)window.getSize().x, newSize.y / (float)window.getSize().y));
 	}
 }
 
@@ -68,15 +68,13 @@ int main()
 
 	SpriteManager spriteManager;
 
-    sf::Texture playerTexture;
-	playerTexture = spriteManager.GetTexture("../sprites/Engine_Ss_png.png");
-	sf::Texture playerProjectileTexture;
-	playerProjectileTexture = spriteManager.GetTexture("../sprites/rocket.png");
+	sf::Texture&  playerTexture = spriteManager.GetTexture("../sprites/Engine_Ss_png.png");
+	sf::Texture& playerProjectileTexture = spriteManager.GetTexture("../sprites/rocket.png");
 	sf::Texture enemyTexture;
 	//enemyTexture.loadFromFile("../sprites/ship_removed.png");
 
 	Player player(&playerTexture, &playerProjectileTexture, 600.f, view, sf::Vector2u(4, 1), 0.1f);
-	EnemyManager enemyManager;
+	EnemyManager enemyManager(&spriteManager);
 
     // TIME
     float deltaTime = 0.0f;
@@ -104,7 +102,7 @@ int main()
 
 		player.Update(deltaTime,view);
 		HandleCollisions(player, enemyManager);
-		enemyManager.Update(deltaTime);
+		enemyManager.Update(deltaTime, window);
 		player.Draw(window);
 		enemyManager.DrawEnemies(window);
 		window.display();

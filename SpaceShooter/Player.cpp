@@ -110,7 +110,7 @@ void Player::HandleInput(float deltaTime, sf::Vector2f* movement, float* fireTim
 		*fireTimer = 0.0f;
 
 		std::shared_ptr<PlayerProjectile> projectile = std::make_shared<PlayerProjectile>(projectileTexture, 
-			sf::Vector2f(body.getPosition().x, body.getPosition().y - 25), 500);
+			sf::Vector2f(body.getPosition().x, body.getPosition().y - 25.0f), 500.0f);
 
 		projectiles.push_back(projectile);
 	}

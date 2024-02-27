@@ -5,7 +5,16 @@ SpriteManager::SpriteManager()
     LoadTexture("../sprites/Engine_Ss_png.png"); // Player
     LoadTexture("../sprites/rocket.png"); // PlayerProjectile
 
+    // Rocks
+    LoadTexture("../sprites/rock1.png");
+    LoadTexture("../sprites/rock2.png");
+    LoadTexture("../sprites/rock3.png");
+    LoadTexture("../sprites/rock4.png");
+    LoadTexture("../sprites/rock5.png");
+}
 
+SpriteManager::~SpriteManager()
+{
 }
 
 bool SpriteManager::LoadTexture(const std::string& filePath)
@@ -23,8 +32,7 @@ bool SpriteManager::LoadTexture(const std::string& filePath)
     return true;
 }
 
-sf::Texture SpriteManager::GetTexture(const std::string& filePath)
+sf::Texture& SpriteManager::GetTexture(const std::string& filePath)
 {
-    if (LoadTexture(filePath))
-        return textures[filePath];
+    return textures[filePath];
 }

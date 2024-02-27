@@ -5,6 +5,7 @@ BasicEnemy::BasicEnemy(sf::Texture* texture, sf::Vector2f size, sf::Vector2f pos
 	health = 3;
 	damage = 1;
 	speed = 200.0f;
+	status = true;
 
 	body.setSize(size);
 	body.setPosition(sf::Vector2f(position.x, position.y - 400.0f));
@@ -30,7 +31,7 @@ void BasicEnemy::Update(float deltaTime)
 
 	if (!atPosition)
 	{
-		movement.y += 300.0 * deltaTime;
+		movement.y += 300.0f * deltaTime;
 
 		body.move(movement);
 

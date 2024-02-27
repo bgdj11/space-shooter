@@ -5,6 +5,7 @@ BigParticleSystem::BigParticleSystem(int count, float particleLifeTime, sf::Colo
 {
     this->particleLifeTime = particleLifeTime;
     this->sizeDecreaseRate = sizeDecrease;
+    status = true;
 
     for (int i = 0; i < count; i++)
     {

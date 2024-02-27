@@ -10,8 +10,9 @@ private:
 
 public:
 	SpriteManager();
+	~SpriteManager();
 	bool LoadTexture(const std::string& filePath);
-	sf::Texture GetTexture(const std::string& filePath);
+	sf::Texture& GetTexture(const std::string& filePath);
 
 };
 

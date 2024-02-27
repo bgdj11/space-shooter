@@ -4,6 +4,8 @@ FirstBoss::FirstBoss(sf::Texture* texture, sf::Vector2f size, sf::Vector2f posit
 {
 	health = 10;
 	damage = 3;
+	speed = 200.0f;
+	status = true;
 
 	body.setSize(size);
 	body.setPosition(position);
