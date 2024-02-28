@@ -6,6 +6,7 @@ FirstBoss::FirstBoss(sf::Texture* texture, sf::Vector2f size, sf::Vector2f posit
 	damage = 3;
 	speed = 200.0f;
 	status = true;
+	hurtTimer = 0.2f;
 
 	body.setSize(size);
 	body.setPosition(position);
@@ -25,4 +26,9 @@ FirstBoss::~FirstBoss()
 void FirstBoss::Update(float deltaTime)
 {
 	// find out !?
+	hurtTimer += deltaTime;
+	if (hurtTimer < 0.2f)
+		body.setFillColor(sf::Color::Red);
+	else
+		body.setFillColor(sf::Color::White);
 }

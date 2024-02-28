@@ -11,6 +11,7 @@ Player::Player(sf::Texture* texture, sf::Texture* projectileTexture, float speed
 	fireCooldown = 3.0f;
 	bulletCnt = 5;
 	health = 2;
+	hurtTimer = 0.3f;
 
 	body.setSize(sf::Vector2f(texture->getSize().x / imageCount.x / 2.5f, texture->getSize().y / 2.5f));
 	body.setOrigin(body.getSize() / 2.0f);
@@ -86,6 +87,14 @@ void Player::Update(float deltaTime, sf::View& view)
 		std::remove_if(explosions.begin(), explosions.end(),
 			[](const std::shared_ptr<BigParticleSystem>& bigParticle) {return !bigParticle->GetStatus(); })
 		, explosions.end());
+
+	// Povreda
+	hurtTimer += deltaTime;
+	if (hurtTimer < 0.3f)
+		body.setFillColor(sf::Color::Red);
+	else
+		body.setFillColor(sf::Color::White);
+
 }
 
 void Player::Draw(sf::RenderWindow& window)
@@ -144,4 +153,9 @@ void Player::TakeDamage(int damage)
 int Player::GetHealth()
 {
 	return health;
+}
+
+void Player::Hurt()
+{
+	hurtTimer = 0.0f;
 }

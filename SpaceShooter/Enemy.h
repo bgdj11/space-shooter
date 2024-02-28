@@ -13,6 +13,7 @@ protected:
 	sf::Vector2f basePosition;
 	std::vector<std::shared_ptr<EnemyProjectile>> projectiles;
 	std::vector<std::shared_ptr<BigParticleSystem>> explosions;
+	float hurtTimer;
 	
 public:
 	void TakeDamage(int damage);
@@ -24,5 +25,6 @@ public:
 	sf::Vector2f GetPosition();
 	std::vector<std::shared_ptr<EnemyProjectile>>& GetProjectiles();
 	void AddExplosion(std::shared_ptr<BigParticleSystem> particleSystem);
+	void Hurt();
 };
 

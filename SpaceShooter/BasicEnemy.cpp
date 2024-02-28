@@ -15,6 +15,7 @@ BasicEnemy::BasicEnemy(sf::Texture* texture, sf::Vector2f size, sf::Vector2f pos
 	status = true;
 	fireCooldown = disFire(gen);
 	fireTimer = 0.0f;
+	hurtTimer = 0.2f;
 
 	body.setSize(size);
 	body.setPosition(sf::Vector2f(position.x, -420.0f));
@@ -126,6 +127,13 @@ void BasicEnemy::Update(float deltaTime)
 		body.move(movement);
 		collisionBox.move(movement);
 	}
+
+	hurtTimer += deltaTime;
+	if (hurtTimer < 0.2f)
+		body.setFillColor(sf::Color::Red);
+	else
+		body.setFillColor(sf::Color::White);
+
 }
 
 void BasicEnemy::Draw(sf::RenderWindow& window)

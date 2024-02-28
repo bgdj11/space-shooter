@@ -19,6 +19,7 @@ public:
 	void AddExplosion(std::shared_ptr<BigParticleSystem> particleSystem);
 	void TakeDamage(int damage);
 	int GetHealth();
+	void Hurt();
 
 private:
 	int health;
@@ -32,6 +33,7 @@ private:
 	int bulletCnt;
 	Animator animator;
 	std::vector<std::shared_ptr<BigParticleSystem>> explosions;
+	float hurtTimer;
 };
 
 

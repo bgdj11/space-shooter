@@ -10,9 +10,15 @@ void Enemy::AddExplosion(std::shared_ptr<BigParticleSystem> particleSystem)
 	explosions.push_back(particleSystem);
 }
 
+void Enemy::Hurt()
+{
+	hurtTimer = 0.0f;
+}
+
 void Enemy::TakeDamage(int damage)
 {
 	health -= damage;
+	Hurt();
 }
 
 int Enemy::GetHealth()
