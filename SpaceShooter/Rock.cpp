@@ -2,7 +2,7 @@
 #include <iostream>
 #include <random>
 
-Rock::Rock(sf::Texture* texture, sf::Vector2f size)
+Rock::Rock(sf::Texture* texture, sf::Vector2f size, float viewSizeX)
 {
 	health = 3;
 	damage = 1;
@@ -11,7 +11,7 @@ Rock::Rock(sf::Texture* texture, sf::Vector2f size)
 
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	std::uniform_real_distribution<float> distrx(30.0f, 970.0f);
+	std::uniform_real_distribution<float> distrx(30.0f, viewSizeX - 30.0f);
 	std::uniform_real_distribution<float> distry(-8000.0f, -600.0f);
 	std::uniform_real_distribution<float> distr(10.0, 60.0f);
 

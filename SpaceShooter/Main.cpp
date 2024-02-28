@@ -103,7 +103,7 @@ void HandleCollisions(Player& player, EnemyManager& enemyManager)
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(1000.0f, 1000.0f), "Space Shooter", sf::Style::Fullscreen);
+	sf::RenderWindow window(sf::VideoMode(1600.0f, 1200.0f), "Space Shooter", sf::Style::Fullscreen);
 	sf::View view(sf::FloatRect(0, 0, VIEW_WIDTH, VIEW_HEIGHT));
 
 	ResizeView(window, view);
@@ -115,7 +115,7 @@ int main()
 	sf::Texture enemyTexture;
 
 	Player player(&playerTexture, &playerProjectileTexture, 600.f, view, sf::Vector2u(4, 1), 0.1f);
-	EnemyManager enemyManager(&spriteManager);
+	EnemyManager enemyManager(&spriteManager, view);
 
     // TIME
     float deltaTime = 0.0f;

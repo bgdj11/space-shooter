@@ -16,7 +16,7 @@ private:
 	unsigned int activeWave;
 
 public:
-	EnemyManager(SpriteManager* spriteManager);
+	EnemyManager(SpriteManager* spriteManager, sf::View& view);
 	~EnemyManager();
 
 	std::vector<std::shared_ptr<Enemy>>& GetFirstWave();
@@ -24,7 +24,8 @@ public:
 	void DrawEnemies(sf::RenderWindow& window);
 	void Update(float deltaTime, sf::RenderWindow& window);
 	void AddExplosion(std::shared_ptr<BigParticleSystem> particleSystem);
-	void CreateRocks(SpriteManager* spriteManager);
+	void CreateRocks(SpriteManager* spriteManager, float viewSizeX);
+	void CreateFirstWave(SpriteManager* spriteManager, sf::View& view);
 	unsigned int GetActiveWave();
 
 };

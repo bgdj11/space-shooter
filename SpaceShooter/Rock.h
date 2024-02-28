@@ -4,7 +4,7 @@
 class Rock : public Enemy
 {
 public:
-	Rock(sf::Texture* texture, sf::Vector2f size);
+	Rock(sf::Texture* texture, sf::Vector2f size, float viewSizeX);
 	~Rock();
 	void Update(float deltaTime) override;
 
