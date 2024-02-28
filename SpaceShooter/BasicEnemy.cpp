@@ -1,12 +1,20 @@
 #include "BasicEnemy.h"
 
-BasicEnemy::BasicEnemy(sf::Texture* texture, sf::Vector2f size, sf::Vector2f position)
+BasicEnemy::BasicEnemy(sf::Texture* texture, sf::Vector2f size, sf::Vector2f position, sf::Texture* projectileTexture)
 	: animator(texture, sf::Vector2u(4, 1), 0.1f)
 {
+
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> dis(0, 1);
+	std::uniform_real_distribution<> disFire(1.5f, 7.5f);
+
 	health = 3;
 	damage = 1;
 	speed = 200.0f;
 	status = true;
+	fireCooldown = disFire(gen);
+	fireTimer = 0.0f;
 
 	body.setSize(size);
 	body.setPosition(sf::Vector2f(position.x, -420.0f));
@@ -19,9 +27,13 @@ BasicEnemy::BasicEnemy(sf::Texture* texture, sf::Vector2f size, sf::Vector2f pos
 	collisionBox.setPosition(body.getPosition());
 
 	basePosition = position;
-	movingLeft = true;
 	accumulatedTime = 0.0f;
 	atPosition = false;
+	movingLeft = false;
+
+	//movingLeft = dis(gen) == 0 ? false : true;
+
+	this->projectileTexture = projectileTexture;
 }
 
 BasicEnemy::~BasicEnemy()
@@ -33,7 +45,7 @@ void BasicEnemy::Update(float deltaTime)
 	sf::Vector2f movement(0.0f, 0.0f);
 	
 	accumulatedTime += deltaTime;
-
+	
 	// Animator
 	animator.Update(0, deltaTime);
 	body.setTextureRect(animator.uvRect);
@@ -50,6 +62,40 @@ void BasicEnemy::Update(float deltaTime)
 	}
 	else
 	{
+		fireTimer += deltaTime;
+		if (fireTimer >= fireCooldown)
+		{
+			std::shared_ptr<EnemyProjectile> projectile = std::make_shared<EnemyProjectile>(projectileTexture,
+				sf::Vector2f(body.getPosition().x, body.getPosition().y - 25.0f), 500.0f);
+			projectiles.push_back(projectile);
+
+			fireTimer = 0.0f;
+		}
+
+		for (auto& projectile : projectiles)
+		{
+			projectile->Update(deltaTime);
+
+			if (projectile->GetPosition().y > 1800.0f)
+				projectile->SetStatus(false);
+		}
+
+		projectiles.erase(
+			std::remove_if(projectiles.begin(), projectiles.end(),
+				[](const std::shared_ptr<EnemyProjectile>& projectile) {return !projectile->GetStatus(); })
+			, projectiles.end());
+
+		// PARTICLE EXPLOSION
+		for (auto& partSys : explosions)
+		{
+			partSys->Update(deltaTime);
+		}
+
+		explosions.erase(
+			std::remove_if(explosions.begin(), explosions.end(),
+				[](const std::shared_ptr<BigParticleSystem>& bigParticle) {return !bigParticle->GetStatus(); })
+			, explosions.end());
+
 		if (movingLeft)
 		{
 			if (body.getPosition().x <= basePosition.x - 200.0f)
@@ -61,7 +107,6 @@ void BasicEnemy::Update(float deltaTime)
 			{
 				movement.x -= speed * deltaTime;
 			}
-			body.setRotation(10);
 		}
 		else
 		{
@@ -74,7 +119,6 @@ void BasicEnemy::Update(float deltaTime)
 			{
 				movement.x += speed * deltaTime;
 			}
-			body.setRotation(-10);
 		}
 
 		// movement.x = 0.5f * sin(accumulatedTime * 0.5f);
@@ -83,3 +127,18 @@ void BasicEnemy::Update(float deltaTime)
 		collisionBox.move(movement);
 	}
 }
+
+void BasicEnemy::Draw(sf::RenderWindow& window)
+{
+	for (auto& projectile : projectiles) {
+		projectile->Draw(window);
+	}
+
+	for (auto& partSys : explosions)
+	{
+		partSys->Draw(window, sf::RenderStates());
+	}
+
+	window.draw(body);
+}
+

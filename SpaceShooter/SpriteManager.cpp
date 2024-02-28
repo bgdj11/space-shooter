@@ -8,6 +8,7 @@ SpriteManager::SpriteManager()
     // First wave
     LoadTexture("../sprites/Boss_1_png.png");
     LoadTexture("../sprites/Enemy1_Ss_png.png");
+    LoadTexture("../sprites/enemy_laser.png");
 
     // Rocks
     LoadTexture("../sprites/rock1.png");

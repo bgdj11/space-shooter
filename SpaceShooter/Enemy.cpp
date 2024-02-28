@@ -1,5 +1,15 @@
 #include "Enemy.h"
 
+std::vector<std::shared_ptr<EnemyProjectile>>& Enemy::GetProjectiles()
+{
+	return projectiles;
+}
+
+void Enemy::AddExplosion(std::shared_ptr<BigParticleSystem> particleSystem)
+{
+	explosions.push_back(particleSystem);
+}
+
 void Enemy::TakeDamage(int damage)
 {
 	health -= damage;

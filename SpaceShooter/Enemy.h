@@ -1,5 +1,7 @@
 #pragma once
 #include "GameObject.h"
+#include "EnemyProjectile.h"
+#include "BigParticleSystem.h"
 
 class Enemy : public GameObject
 {
@@ -9,6 +11,8 @@ protected:
 	bool status;
 	float speed;
 	sf::Vector2f basePosition;
+	std::vector<std::shared_ptr<EnemyProjectile>> projectiles;
+	std::vector<std::shared_ptr<BigParticleSystem>> explosions;
 	
 public:
 	void TakeDamage(int damage);
@@ -18,5 +22,7 @@ public:
 	bool GetStatus();
 	virtual void Update(float deltaTime);
 	sf::Vector2f GetPosition();
+	std::vector<std::shared_ptr<EnemyProjectile>>& GetProjectiles();
+	void AddExplosion(std::shared_ptr<BigParticleSystem> particleSystem);
 };
 

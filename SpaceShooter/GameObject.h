@@ -9,7 +9,6 @@ protected:
 	sf::RectangleShape collisionBox;
 
 public:
-
 	GameObject();
 	virtual void Update();
 	virtual void Draw(sf::RenderWindow& window);
