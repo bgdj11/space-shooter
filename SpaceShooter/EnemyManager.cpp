@@ -2,11 +2,36 @@
 
 EnemyManager::EnemyManager(SpriteManager* spriteManager)
 {
-	std::shared_ptr<BasicEnemy> enemy1 = std::make_shared<BasicEnemy>(nullptr, sf::Vector2f(50.0f, 50.0f), sf::Vector2f(800.0f, 200.0f));
-	//firstWave.push_back(enemy1);
-	std::shared_ptr<BasicEnemy> enemy2 = std::make_shared<BasicEnemy>(nullptr, sf::Vector2f(50.0f, 50.0f), sf::Vector2f(200.0f, 200.0f));
-	//firstWave.push_back(enemy2);
-	std::shared_ptr<FirstBoss> boss1 = std::make_shared<FirstBoss>(nullptr, sf::Vector2f(180.0f, 180.0f), sf::Vector2f(500.0f, 150.0f));
+	sf::Texture& firstBossTexture = spriteManager->GetTexture("../sprites/Boss_1_png.png");
+	sf::Texture& firstEnemyTexture = spriteManager->GetTexture("../sprites/Enemy1_Ss_png.png");
+
+	std::shared_ptr<BasicEnemy> enemy1 = std::make_shared<BasicEnemy>(&firstEnemyTexture, sf::Vector2f(330.0f, 100.0f), sf::Vector2f(800.0f, 160.0f));
+	firstWave.push_back(enemy1);
+	std::shared_ptr<BasicEnemy> enemy2 = std::make_shared<BasicEnemy>(&firstEnemyTexture, sf::Vector2f(330.0f, 100.0f), sf::Vector2f(200.0f, 160.0f));
+	firstWave.push_back(enemy2);
+	std::shared_ptr<BasicEnemy> enemy3 = std::make_shared<BasicEnemy>(&firstEnemyTexture, sf::Vector2f(330.0f, 100.0f), sf::Vector2f(700.0f, 250.0f));
+	firstWave.push_back(enemy3);
+	std::shared_ptr<BasicEnemy> enemy4 = std::make_shared<BasicEnemy>(&firstEnemyTexture, sf::Vector2f(330.0f, 100.0f), sf::Vector2f(300.0f, 250.0f));
+	firstWave.push_back(enemy4);
+	std::shared_ptr<BasicEnemy> enemy5 = std::make_shared<BasicEnemy>(&firstEnemyTexture, sf::Vector2f(330.0f, 100.0f), sf::Vector2f(550.0f, 460.0f));
+	firstWave.push_back(enemy5);
+	std::shared_ptr<BasicEnemy> enemy6 = std::make_shared<BasicEnemy>(&firstEnemyTexture, sf::Vector2f(330.0f, 100.0f), sf::Vector2f(450.0f, 460.0f));
+	firstWave.push_back(enemy6);
+	std::shared_ptr<BasicEnemy> enemy7 = std::make_shared<BasicEnemy>(&firstEnemyTexture, sf::Vector2f(330.0f, 100.0f), sf::Vector2f(150.0f, 350.0f));
+	firstWave.push_back(enemy7);
+	std::shared_ptr<BasicEnemy> enemy8 = std::make_shared<BasicEnemy>(&firstEnemyTexture, sf::Vector2f(330.0f, 100.0f), sf::Vector2f(850.0f, 350.0f));
+	firstWave.push_back(enemy8);
+	std::shared_ptr<BasicEnemy> enemy9 = std::make_shared<BasicEnemy>(&firstEnemyTexture, sf::Vector2f(330.0f, 100.0f), sf::Vector2f(500.0f, 290.0f));
+	firstWave.push_back(enemy9);
+	std::shared_ptr<BasicEnemy> enemy10 = std::make_shared<BasicEnemy>(&firstEnemyTexture, sf::Vector2f(330.0f, 100.0f), sf::Vector2f(600.0f, 290.0f));
+	firstWave.push_back(enemy10);
+	std::shared_ptr<BasicEnemy> enemy11 = std::make_shared<BasicEnemy>(&firstEnemyTexture, sf::Vector2f(330.0f, 100.0f), sf::Vector2f(400.0f, 290.0f));
+	firstWave.push_back(enemy11);
+	std::shared_ptr<BasicEnemy> enemy12 = std::make_shared<BasicEnemy>(&firstEnemyTexture, sf::Vector2f(330.0f, 100.0f), sf::Vector2f(880.0f, 220.0f));
+	firstWave.push_back(enemy12);
+	std::shared_ptr<BasicEnemy> enemy13 = std::make_shared<BasicEnemy>(&firstEnemyTexture, sf::Vector2f(330.0f, 100.0f), sf::Vector2f(120.0f, 220.0f));
+	firstWave.push_back(enemy13);
+	std::shared_ptr<FirstBoss> boss1 = std::make_shared<FirstBoss>(&firstBossTexture, sf::Vector2f(122.0f, 157.0f), sf::Vector2f(500.0f, 150.0f));
 	firstWave.push_back(boss1);
 
 	CreateRocks(spriteManager);

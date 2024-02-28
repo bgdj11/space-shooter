@@ -1,6 +1,7 @@
 #pragma once
 #include "Enemy.h"
 #include <cmath>
+#include "Animator.h"
 
 class BasicEnemy : public Enemy
 {
@@ -13,5 +14,6 @@ private:
 	bool movingLeft;
 	float accumulatedTime;
 	bool atPosition;
+	Animator animator;
 };
 

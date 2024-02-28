@@ -104,15 +104,18 @@ void Player::Draw(sf::RenderWindow& window)
 
 void Player::HandleInput(float deltaTime, sf::Vector2f* movement, float* fireTimer, int* bulletCnt)
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) or sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) or sf::Keyboard::isKeyPressed(sf::Keyboard::J)) 
+	{
 		movement->x -= speed * deltaTime;
 		rotation = -10.0f;
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) or sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::L) or sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) 
+	{
 		movement->x += speed * deltaTime;
 		rotation = 10.0f;
 	}
-	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Space) or sf::Mouse::isButtonPressed(sf::Mouse::Left)) && *fireTimer >= fireRate && *bulletCnt > 0) {
+	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Z) && *fireTimer >= fireRate && *bulletCnt > 0))
+	{
 		*bulletCnt -= 1;
 		*fireTimer = 0.0f;
 

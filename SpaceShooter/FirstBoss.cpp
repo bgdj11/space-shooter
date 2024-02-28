@@ -9,8 +9,8 @@ FirstBoss::FirstBoss(sf::Texture* texture, sf::Vector2f size, sf::Vector2f posit
 
 	body.setSize(size);
 	body.setPosition(position);
-	body.setFillColor(sf::Color(16, 115, 37));
-	//body.setTexture(texture);
+	//body.setFillColor(sf::Color(16, 115, 37));
+	body.setTexture(texture);
 	body.setOrigin(body.getSize() / 2.0f);
 
 	collisionBox.setSize(sf::Vector2f(body.getSize().x * 0.8f, body.getSize().y * 0.8f));

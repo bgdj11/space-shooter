@@ -1,6 +1,7 @@
 #include "BasicEnemy.h"
 
 BasicEnemy::BasicEnemy(sf::Texture* texture, sf::Vector2f size, sf::Vector2f position)
+	: animator(texture, sf::Vector2u(4, 1), 0.1f)
 {
 	health = 3;
 	damage = 1;
@@ -8,12 +9,12 @@ BasicEnemy::BasicEnemy(sf::Texture* texture, sf::Vector2f size, sf::Vector2f pos
 	status = true;
 
 	body.setSize(size);
-	body.setPosition(sf::Vector2f(position.x, position.y - 400.0f));
-	body.setFillColor(sf::Color(3, 252, 132));
-	//body.setTexture(texture);
+	body.setPosition(sf::Vector2f(position.x, -420.0f));
+	body.setTexture(texture);
 	body.setOrigin(body.getSize() / 2.0f);
 
-	collisionBox.setSize(sf::Vector2f(body.getSize().x * 0.8f, body.getSize().y * 0.8f));
+	collisionBox.setSize(sf::Vector2f(body.getSize().x * 0.2f, body.getSize().y * 0.5f));
+	collisionBox.setFillColor(sf::Color::Red);
 	collisionBox.setOrigin(collisionBox.getSize() / 2.0f);
 	collisionBox.setPosition(body.getPosition());
 
@@ -33,6 +34,10 @@ void BasicEnemy::Update(float deltaTime)
 	
 	accumulatedTime += deltaTime;
 
+	// Animator
+	animator.Update(0, deltaTime);
+	body.setTextureRect(animator.uvRect);
+
 	if (!atPosition)
 	{
 		movement.y += 300.0f * deltaTime;
@@ -40,14 +45,14 @@ void BasicEnemy::Update(float deltaTime)
 		body.move(movement);
 		collisionBox.move(movement);
 
-		if (std::abs(body.getPosition().y - basePosition.y) <= 10.0f)
+		if (std::abs(body.getPosition().y - basePosition.y) <= 7.0f)
 			atPosition = true;
 	}
 	else
 	{
 		if (movingLeft)
 		{
-			if (body.getPosition().x <= basePosition.x - 100.0f)
+			if (body.getPosition().x <= basePosition.x - 200.0f)
 			{
 				movement.x += speed * deltaTime;
 				movingLeft = false;
@@ -56,10 +61,11 @@ void BasicEnemy::Update(float deltaTime)
 			{
 				movement.x -= speed * deltaTime;
 			}
+			body.setRotation(10);
 		}
 		else
 		{
-			if (body.getPosition().x >= basePosition.x + 100.0f)
+			if (body.getPosition().x >= basePosition.x + 200.0f)
 			{
 				movement.x -= speed * deltaTime;
 				movingLeft = true;
@@ -68,10 +74,11 @@ void BasicEnemy::Update(float deltaTime)
 			{
 				movement.x += speed * deltaTime;
 			}
+			body.setRotation(-10);
 		}
 
 		// movement.x = 0.5f * sin(accumulatedTime * 0.5f);
-		movement.y = 0.5f * sin(accumulatedTime * 5);
+		movement.y = 0.2f * sin(accumulatedTime * 5);
 		body.move(movement);
 		collisionBox.move(movement);
 	}
