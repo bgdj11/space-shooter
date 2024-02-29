@@ -5,6 +5,7 @@
 #include <memory>
 #include "SpriteManager.h"
 #include <iostream>
+#include "Background.h"
 
 static const float VIEW_WIDTH = 1080.0f;
 static const float VIEW_HEIGHT = 1080.0f;
@@ -115,30 +116,6 @@ void HandleCollisions(Player& player, EnemyManager& enemyManager)
 	}
 }
 
-void CreateBackground(sf::View& view, sf::VertexArray& spaceBackground)
-{
-	spaceBackground[0].position = sf::Vector2f(0, 0);
-	spaceBackground[1].position = sf::Vector2f(view.getSize().x / 2, 0);
-	spaceBackground[2].position = sf::Vector2f(view.getSize().x / 2, view.getSize().y);
-	spaceBackground[3].position = sf::Vector2f(0, view.getSize().y);
-
-	spaceBackground[0].color = sf::Color(3, 2, 20);
-	spaceBackground[1].color = sf::Color(10, 10, 60);
-	spaceBackground[2].color = sf::Color(10, 10, 60);
-	spaceBackground[3].color = sf::Color(3, 2, 20);
-
-
-	spaceBackground[4].position = sf::Vector2f(view.getSize().x / 2, 0);
-	spaceBackground[5].position = sf::Vector2f(view.getSize().x, 0);
-	spaceBackground[6].position = sf::Vector2f(view.getSize().x, view.getSize().y);
-	spaceBackground[7].position = sf::Vector2f(view.getSize().x / 2, view.getSize().y);
-
-	spaceBackground[4].color = sf::Color(10, 10, 60);
-	spaceBackground[5].color = sf::Color(3, 2, 20);
-	spaceBackground[6].color = sf::Color(3, 2, 20);
-	spaceBackground[7].color = sf::Color(10, 10, 60);
-}
-
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Space Shooter", sf::Style::Fullscreen);
@@ -155,8 +132,7 @@ int main()
 	Player player(&playerTexture, &playerProjectileTexture, 600.f, view, sf::Vector2u(4, 1), 0.1f);
 	EnemyManager enemyManager(&spriteManager, view);
 
-	sf::VertexArray spaceBackground(sf::Quads, 8);
-	CreateBackground(view, spaceBackground);
+	Background background(view);
 
     // TIME
     float deltaTime = 0.0f;
@@ -178,7 +154,8 @@ int main()
 		window.clear(sf::Color::Black);
 		window.setView(view);
 
-		window.draw(spaceBackground);
+		background.Update(deltaTime, view.getSize().y);
+		background.Draw(window);
 
 		player.Update(deltaTime,view);
 		HandleCollisions(player, enemyManager);

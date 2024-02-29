@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animator.cpp" />
+    <ClCompile Include="Background.cpp" />
     <ClCompile Include="BasicEnemy.cpp" />
     <ClCompile Include="BigParticleSystem.cpp" />
     <ClCompile Include="Collider.cpp" />
@@ -158,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animator.h" />
+    <ClInclude Include="Background.h" />
     <ClInclude Include="BasicEnemy.h" />
     <ClInclude Include="BigParticleSystem.h" />
     <ClInclude Include="Collider.h" />

@@ -1,7 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
-struct BigParticle {
+struct BigParticle 
+{
     sf::Vector2f position;
     sf::Vector2f velocity;
     sf::Color color;
