@@ -6,8 +6,8 @@
 #include "SpriteManager.h"
 #include <iostream>
 
-static const float VIEW_WIDTH = 1000.0f;
-static const float VIEW_HEIGHT = 1000.0f;
+static const float VIEW_WIDTH = 1080.0f;
+static const float VIEW_HEIGHT = 1080.0f;
 
 void ResizeView(const sf::RenderWindow& window, sf::View& view)
 {
