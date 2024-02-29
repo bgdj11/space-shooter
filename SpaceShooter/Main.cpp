@@ -71,7 +71,7 @@ void HandleCollisions(Player& player, EnemyManager& enemyManager)
 					player.TakeDamage(enemyProjectile->GetDamage());
 					player.Hurt();
 
-					std::shared_ptr<BigParticleSystem> explosion = std::make_shared<BigParticleSystem>(20, 2.0f, sf::Color(247, 62, 0), enemyProjectile->GetPosition(), 3.0f, 6.0f, 1.0f);
+					std::shared_ptr<BigParticleSystem> explosion = std::make_shared<BigParticleSystem>(20, 2.0f, sf::Color(252, 186, 3), enemyProjectile->GetPosition(), 3.0f, 6.0f, 1.0f);
 					enemy->AddExplosion(explosion);
 				}
 			}
@@ -115,9 +115,33 @@ void HandleCollisions(Player& player, EnemyManager& enemyManager)
 	}
 }
 
+void CreateBackground(sf::View& view, sf::VertexArray& spaceBackground)
+{
+	spaceBackground[0].position = sf::Vector2f(0, 0);
+	spaceBackground[1].position = sf::Vector2f(view.getSize().x / 2, 0);
+	spaceBackground[2].position = sf::Vector2f(view.getSize().x / 2, view.getSize().y);
+	spaceBackground[3].position = sf::Vector2f(0, view.getSize().y);
+
+	spaceBackground[0].color = sf::Color(6, 2, 28);
+	spaceBackground[1].color = sf::Color(10, 14, 56);
+	spaceBackground[2].color = sf::Color(10, 14, 56);
+	spaceBackground[3].color = sf::Color(6, 2, 28);
+
+
+	spaceBackground[4].position = sf::Vector2f(view.getSize().x / 2, 0);
+	spaceBackground[5].position = sf::Vector2f(view.getSize().x, 0);
+	spaceBackground[6].position = sf::Vector2f(view.getSize().x, view.getSize().y);
+	spaceBackground[7].position = sf::Vector2f(view.getSize().x / 2, view.getSize().y);
+
+	spaceBackground[4].color = sf::Color(10, 14, 56);
+	spaceBackground[5].color = sf::Color(6, 2, 28);
+	spaceBackground[6].color = sf::Color(6, 2, 28);
+	spaceBackground[7].color = sf::Color(10, 14, 56);
+}
+
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(1600, 1200), "Space Shooter", sf::Style::Fullscreen);
+	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Space Shooter", sf::Style::Fullscreen);
 	sf::View view(sf::FloatRect(0, 0, VIEW_WIDTH, VIEW_HEIGHT));
 
 	ResizeView(window, view);
@@ -130,6 +154,9 @@ int main()
 
 	Player player(&playerTexture, &playerProjectileTexture, 600.f, view, sf::Vector2u(4, 1), 0.1f);
 	EnemyManager enemyManager(&spriteManager, view);
+
+	sf::VertexArray spaceBackground(sf::Quads, 8);
+	CreateBackground(view, spaceBackground);
 
     // TIME
     float deltaTime = 0.0f;
@@ -151,9 +178,7 @@ int main()
 		window.clear(sf::Color::Black);
 		window.setView(view);
 
-		sf::RectangleShape background(sf::Vector2f(view.getSize().x, view.getSize().y));
-		background.setFillColor(sf::Color(20, 10, 43));
-		window.draw(background);
+		window.draw(spaceBackground);
 
 		player.Update(deltaTime,view);
 		HandleCollisions(player, enemyManager);

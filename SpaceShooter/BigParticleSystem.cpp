@@ -55,6 +55,8 @@ void BigParticleSystem::Draw(sf::RenderTarget& target, sf::RenderStates states)
         sf::CircleShape circle(particle.size / 2.0f);
         circle.setPosition(particle.position);
         circle.setFillColor(particle.color);
+        circle.setOutlineColor(sf::Color::Black);
+        circle.setOutlineThickness(0.8f);
         target.draw(circle, states);
     }
 
