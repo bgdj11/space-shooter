@@ -122,10 +122,10 @@ void CreateBackground(sf::View& view, sf::VertexArray& spaceBackground)
 	spaceBackground[2].position = sf::Vector2f(view.getSize().x / 2, view.getSize().y);
 	spaceBackground[3].position = sf::Vector2f(0, view.getSize().y);
 
-	spaceBackground[0].color = sf::Color(6, 2, 28);
-	spaceBackground[1].color = sf::Color(10, 14, 56);
-	spaceBackground[2].color = sf::Color(10, 14, 56);
-	spaceBackground[3].color = sf::Color(6, 2, 28);
+	spaceBackground[0].color = sf::Color(3, 2, 20);
+	spaceBackground[1].color = sf::Color(10, 10, 60);
+	spaceBackground[2].color = sf::Color(10, 10, 60);
+	spaceBackground[3].color = sf::Color(3, 2, 20);
 
 
 	spaceBackground[4].position = sf::Vector2f(view.getSize().x / 2, 0);
@@ -133,10 +133,10 @@ void CreateBackground(sf::View& view, sf::VertexArray& spaceBackground)
 	spaceBackground[6].position = sf::Vector2f(view.getSize().x, view.getSize().y);
 	spaceBackground[7].position = sf::Vector2f(view.getSize().x / 2, view.getSize().y);
 
-	spaceBackground[4].color = sf::Color(10, 14, 56);
-	spaceBackground[5].color = sf::Color(6, 2, 28);
-	spaceBackground[6].color = sf::Color(6, 2, 28);
-	spaceBackground[7].color = sf::Color(10, 14, 56);
+	spaceBackground[4].color = sf::Color(10, 10, 60);
+	spaceBackground[5].color = sf::Color(3, 2, 20);
+	spaceBackground[6].color = sf::Color(3, 2, 20);
+	spaceBackground[7].color = sf::Color(10, 10, 60);
 }
 
 int main()

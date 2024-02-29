@@ -1,8 +1,8 @@
 #include "EnemyManager.h"
 
 EnemyManager::EnemyManager(SpriteManager* spriteManager, sf::View& view)
+	: gen(std::random_device()()), dist(-8000.0f, -100.0f)
 {
-	
 	CreateFirstWave(spriteManager, view);
 	CreateRocks(spriteManager, view.getSize().x);
 
@@ -68,8 +68,16 @@ void EnemyManager::Update(float deltaTime, sf::RenderWindow& window)
 		{
 			enemy->Update(deltaTime);
 
-			if (enemy->GetPosition().y - 500.0f > window.getSize().y)
-				enemy->SetStatus(false);
+			if (enemy->GetPosition().y - 400.0f > window.getSize().y)
+			{
+				enemy->UpdateAppearance();
+				if (enemy->GetAppearance() == 3)
+					enemy->SetStatus(false);	
+				else 
+					enemy->SetPosition(sf::Vector2f(enemy->GetPosition().x, dist(gen)));
+					
+					
+			}
 		}
 		
 		rocks.erase(

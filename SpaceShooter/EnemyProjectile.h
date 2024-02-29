@@ -13,7 +13,7 @@ public:
 	int GetDamage();
 	void Draw(sf::RenderWindow& window) override;
 
-private:
+protected:
 	float speed;
 	bool status;
 	int damage;

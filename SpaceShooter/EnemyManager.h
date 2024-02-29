@@ -6,6 +6,7 @@
 #include "BigParticleSystem.h"
 #include "SpriteManager.h"
 #include "Rock.h"
+#include <random>
 
 class EnemyManager
 {
@@ -14,6 +15,9 @@ private:
 	std::vector<std::shared_ptr<BigParticleSystem>> explosions;
 	std::vector<std::shared_ptr<Enemy>> rocks;
 	unsigned int activeWave;
+
+	std::mt19937 gen;
+	std::uniform_real_distribution<float> dist; 
 
 public:
 	EnemyManager(SpriteManager* spriteManager, sf::View& view);

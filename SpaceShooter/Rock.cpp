@@ -8,6 +8,7 @@ Rock::Rock(sf::Texture* texture, sf::Vector2f size, float viewSizeX)
 	damage = 1;
 	speed = 450.0f;
 	status = true;
+	appearance = 1;
 
 	std::random_device rd;
 	std::mt19937 gen(rd());

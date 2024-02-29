@@ -14,6 +14,7 @@ protected:
 	std::vector<std::shared_ptr<EnemyProjectile>> projectiles;
 	std::vector<std::shared_ptr<BigParticleSystem>> explosions;
 	float hurtTimer;
+	int appearance;
 	
 public:
 	void TakeDamage(int damage);
@@ -23,8 +24,11 @@ public:
 	bool GetStatus();
 	virtual void Update(float deltaTime);
 	sf::Vector2f GetPosition();
+	void SetPosition(sf::Vector2f position);
 	std::vector<std::shared_ptr<EnemyProjectile>>& GetProjectiles();
 	void AddExplosion(std::shared_ptr<BigParticleSystem> particleSystem);
 	void Hurt();
+	void UpdateAppearance();
+	int GetAppearance();
 };
 
