@@ -36,7 +36,7 @@ Background::Background(sf::View& view)
 		star.position = sf::Vector2f(distx(gen), disty(gen));
 		star.size = dists(gen);
 		star.rotation = distr(gen);
-		star.velocity = sf::Vector2f(0.0f, 10.0f * star.size);
+		star.velocity = sf::Vector2f(0.0f, 20.0f * star.size);
 		star.color = sf::Color(255, 255, distc(gen));
 
 		stars.push_back(star);

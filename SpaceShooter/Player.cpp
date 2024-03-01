@@ -12,6 +12,9 @@ Player::Player(sf::Texture* texture, sf::Texture* projectileTexture, float speed
 	bulletCnt = 5;
 	health = 2;
 	hurtTimer = 0.3f;
+	shieldTimer = 0.5f;
+	shieldResetTimer = 5.0f;
+	isShieldActive = false;
 
 	body.setSize(sf::Vector2f(texture->getSize().x / imageCount.x / 2.5f, texture->getSize().y / 2.5f));
 	body.setOrigin(body.getSize() / 2.0f);
@@ -90,10 +93,19 @@ void Player::Update(float deltaTime, sf::View& view)
 
 	// Povreda
 	hurtTimer += deltaTime;
-	if (hurtTimer < 0.3f)
+
+	// Shield and hurt body color
+	shieldResetTimer += deltaTime;
+	shieldTimer += deltaTime;
+	if(shieldTimer < 0.5f)
+		body.setFillColor(sf::Color(0, 147, 255));
+	else if (hurtTimer < 0.3f)
 		body.setFillColor(sf::Color::Red);
 	else
+	{
 		body.setFillColor(sf::Color::White);
+		isShieldActive = false;
+	}
 
 }
 
@@ -133,6 +145,12 @@ void Player::HandleInput(float deltaTime, sf::Vector2f* movement, float* fireTim
 
 		projectiles.push_back(projectile);
 	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::V) && shieldResetTimer >= 5.0f)
+	{
+		isShieldActive = true;
+		shieldTimer = 0.0f;
+		shieldResetTimer = 0.0f;
+	}
 }
 
 std::vector<std::shared_ptr<PlayerProjectile>>& Player::GetPlayerProjectiles()
@@ -147,7 +165,11 @@ void Player::AddExplosion(std::shared_ptr<BigParticleSystem> particleSystem)
 
 void Player::TakeDamage(int damage)
 {
-	health -= damage;
+	if (!ShieldActive())
+	{
+		health -= damage;
+		Hurt();
+	}
 }
 
 int Player::GetHealth()
@@ -158,4 +180,9 @@ int Player::GetHealth()
 void Player::Hurt()
 {
 	hurtTimer = 0.0f;
+}
+
+bool Player::ShieldActive()
+{
+	return isShieldActive;
 }

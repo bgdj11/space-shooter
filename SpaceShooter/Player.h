@@ -20,6 +20,7 @@ public:
 	void TakeDamage(int damage);
 	int GetHealth();
 	void Hurt();
+	bool ShieldActive();
 
 private:
 	int health;
@@ -34,6 +35,9 @@ private:
 	Animator animator;
 	std::vector<std::shared_ptr<BigParticleSystem>> explosions;
 	float hurtTimer;
+	float shieldTimer;
+	float shieldResetTimer;
+	bool isShieldActive;
 };
 
 
