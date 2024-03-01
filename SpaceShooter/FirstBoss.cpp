@@ -3,7 +3,7 @@
 FirstBoss::FirstBoss(sf::Texture* texture, sf::Vector2f size, sf::Vector2f position)
 	: animator(texture, sf::Vector2u(4, 1), 0.1f)
 {
-	health = 10;
+	health = 2;
 	damage = 3;
 	speed = 200.0f;
 	status = true;
@@ -12,6 +12,7 @@ FirstBoss::FirstBoss(sf::Texture* texture, sf::Vector2f size, sf::Vector2f posit
 	basePosition = position;
 	movingLeft = false;
 	accumulatedTime = 0.0f;
+	boss = true;
 
 	body.setSize(size);
 	body.setPosition(sf::Vector2f(position.x, -620.0f));

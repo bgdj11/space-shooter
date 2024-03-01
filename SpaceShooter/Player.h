@@ -20,7 +20,6 @@ public:
 	void TakeDamage(int damage);
 	int GetHealth();
 	void Hurt();
-	bool ShieldActive();
 
 private:
 	int health;

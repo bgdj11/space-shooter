@@ -165,7 +165,7 @@ void Player::AddExplosion(std::shared_ptr<BigParticleSystem> particleSystem)
 
 void Player::TakeDamage(int damage)
 {
-	if (!ShieldActive())
+	if (!isShieldActive)
 	{
 		health -= damage;
 		Hurt();
@@ -180,9 +180,4 @@ int Player::GetHealth()
 void Player::Hurt()
 {
 	hurtTimer = 0.0f;
-}
-
-bool Player::ShieldActive()
-{
-	return isShieldActive;
 }

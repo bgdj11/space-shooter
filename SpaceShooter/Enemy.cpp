@@ -31,6 +31,11 @@ int Enemy::GetAppearance()
 	return appearance;
 }
 
+bool Enemy::IsBoss()
+{
+	return boss;
+}
+
 void Enemy::TakeDamage(int damage)
 {
 	health -= damage;

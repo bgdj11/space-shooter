@@ -16,6 +16,7 @@ BasicEnemy::BasicEnemy(sf::Texture* texture, sf::Vector2f size, sf::Vector2f pos
 	fireCooldown = disFire(gen);
 	fireTimer = 0.0f;
 	hurtTimer = 0.2f;
+	boss = false;
 
 	body.setSize(size);
 	body.setPosition(sf::Vector2f(position.x, -420.0f));

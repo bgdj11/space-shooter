@@ -15,6 +15,7 @@ protected:
 	std::vector<std::shared_ptr<BigParticleSystem>> explosions;
 	float hurtTimer;
 	int appearance;
+	bool boss;
 	
 public:
 	void TakeDamage(int damage);
@@ -30,5 +31,6 @@ public:
 	void Hurt();
 	void UpdateAppearance();
 	int GetAppearance();
+	bool IsBoss();
 };
 
