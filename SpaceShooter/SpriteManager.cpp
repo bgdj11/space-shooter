@@ -9,6 +9,7 @@ SpriteManager::SpriteManager()
     LoadTexture("../sprites/Boss_1_Ss_png.png");
     LoadTexture("../sprites/Enemy1_Ss_png.png");
     LoadTexture("../sprites/enemy_laser.png");
+    LoadTexture("../sprites/projectile.png");
 
     // Rocks
     LoadTexture("../sprites/rock1.png");

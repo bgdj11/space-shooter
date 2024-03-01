@@ -30,7 +30,7 @@ Background::Background(sf::View& view)
 {
 	CreateBackground(view, spaceBackground);
 
-	for (int i = 0; i < 200; i++)
+	for (int i = 0; i < 100; i++)
 	{
 		Star star;
 		star.position = sf::Vector2f(distx(gen), disty(gen));

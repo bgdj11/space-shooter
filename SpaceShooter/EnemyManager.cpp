@@ -243,6 +243,7 @@ void EnemyManager::CreateFirstWave(SpriteManager* spriteManager, sf::View& view)
 	sf::Texture& firstBossTexture = spriteManager->GetTexture("../sprites/Boss_1_Ss_png.png");
 	sf::Texture& firstEnemyTexture = spriteManager->GetTexture("../sprites/Enemy1_Ss_png.png");
 	sf::Texture& basicEnemyProjectileTexture = spriteManager->GetTexture("../sprites/enemy_laser.png");
+	sf::Texture& firstBossProjectileTexture = spriteManager->GetTexture("../sprites/projectile.png");
 
 	std::shared_ptr<BasicEnemy> enemy1 = std::make_shared<BasicEnemy>(&firstEnemyTexture, sf::Vector2f(330.0f, 100.0f), sf::Vector2f(view.getSize().x * 0.2f, 160.0f), &basicEnemyProjectileTexture);
 	firstWave.push_back(enemy1);
@@ -270,7 +271,7 @@ void EnemyManager::CreateFirstWave(SpriteManager* spriteManager, sf::View& view)
 	firstWave.push_back(enemy12);
 	std::shared_ptr<BasicEnemy> enemy13 = std::make_shared<BasicEnemy>(&firstEnemyTexture, sf::Vector2f(330.0f, 100.0f), sf::Vector2f(view.getSize().x * 0.88f, 220.0f), &basicEnemyProjectileTexture);
 	firstWave.push_back(enemy13);
-	std::shared_ptr<FirstBoss> boss1 = std::make_shared<FirstBoss>(&firstBossTexture, sf::Vector2f(500.0f, 160.0f), sf::Vector2f(view.getSize().x / 2.0f, 150.0f));
+	std::shared_ptr<FirstBoss> boss1 = std::make_shared<FirstBoss>(&firstBossTexture, sf::Vector2f(500.0f, 160.0f), sf::Vector2f(view.getSize().x / 2.0f, 150.0f), &basicEnemyProjectileTexture);
 	firstWave.push_back(boss1);
 }
 

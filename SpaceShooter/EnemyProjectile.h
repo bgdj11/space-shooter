@@ -6,7 +6,7 @@ class EnemyProjectile : public GameObject
 public:
 	EnemyProjectile(sf::Texture* texture, sf::Vector2f position, float speed);
 	~EnemyProjectile();
-	void Update(float deltaTime);
+	virtual void Update(float deltaTime);
 	sf::Vector2f GetPosition();
 	bool GetStatus() const;
 	void SetStatus(bool status);
