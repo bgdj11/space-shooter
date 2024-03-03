@@ -4,6 +4,7 @@ SpriteManager::SpriteManager()
 {
     LoadTexture("../sprites/Engine_Ss_png.png"); // Player
     LoadTexture("../sprites/rocket.png"); // PlayerProjectile
+    LoadTexture("../sprites/Projectile_png.png"); // PlayerProjectile
 
     // First wave
     LoadTexture("../sprites/Boss_1_Ss_png.png");

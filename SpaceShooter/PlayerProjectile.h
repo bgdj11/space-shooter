@@ -20,6 +20,5 @@ private:
 	float speed;
 	bool status;
 	int damage;
-	ParticleSystem particleSystem;
 };
 

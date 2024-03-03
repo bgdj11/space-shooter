@@ -8,8 +8,8 @@ void CreateBackground(sf::View& view, sf::VertexArray& spaceBackground)
 	spaceBackground[3].position = sf::Vector2f(0, view.getSize().y);
 
 	spaceBackground[0].color = sf::Color(3, 2, 20);
-	spaceBackground[1].color = sf::Color(10, 10, 35);
-	spaceBackground[2].color = sf::Color(10, 10, 35);
+	spaceBackground[1].color = sf::Color(13, 13, 35);
+	spaceBackground[2].color = sf::Color(13, 13, 35);
 	spaceBackground[3].color = sf::Color(3, 2, 20);
 
 
@@ -18,19 +18,19 @@ void CreateBackground(sf::View& view, sf::VertexArray& spaceBackground)
 	spaceBackground[6].position = sf::Vector2f(view.getSize().x, view.getSize().y);
 	spaceBackground[7].position = sf::Vector2f(view.getSize().x / 2, view.getSize().y);
 
-	spaceBackground[4].color = sf::Color(10, 10, 35);
+	spaceBackground[4].color = sf::Color(13, 13, 35);
 	spaceBackground[5].color = sf::Color(3, 2, 20);
 	spaceBackground[6].color = sf::Color(3, 2, 20);
-	spaceBackground[7].color = sf::Color(10, 10, 35);
+	spaceBackground[7].color = sf::Color(13, 13, 35);
 }
 
 Background::Background(sf::View& view) 
 	: spaceBackground(sf::Quads, 8), gen(std::random_device()()), disty(-200.0f, (float)view.getSize().y), distx(-10.0f, (float)view.getSize().x + 10.0f),
-		dists(1.5f, 3.5f), distr(0.0f, 90.0f), distc(0, 255)
+		dists(1.5f, 4.0f), distr(0.0f, 90.0f), distc(0, 255)
 {
 	CreateBackground(view, spaceBackground);
 
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < 150; i++)
 	{
 		Star star;
 		star.position = sf::Vector2f(distx(gen), disty(gen));

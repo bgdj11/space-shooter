@@ -32,9 +32,9 @@ void FirstBossProjectile::Update(float deltaTime)
 	accumulatedTime += deltaTime;
 	
 	if(sign)
-		movement.x = 2.5f * cos(accumulatedTime * 10);
+		movement.x = 2.0f * cos(accumulatedTime * 8);
 	else
-		movement.x = -2.5f * cos(accumulatedTime * 10);
+		movement.x = -2.0f * cos(accumulatedTime * 8);
 
 	body.move(movement);
 	collisionBox.move(movement);

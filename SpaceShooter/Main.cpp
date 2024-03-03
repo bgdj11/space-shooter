@@ -63,14 +63,10 @@ void HandleCollisions(Player& player, EnemyManager& enemyManager)
 						else
 						{
 							// Boss explosion
-							std::shared_ptr<BigParticleSystem> explosion1 = std::make_shared<BigParticleSystem>(120, 2.0f, sf::Color(166, 68, 151), enemy->GetPosition(), 3.0f, 15.0f, 2.5f);
+							std::shared_ptr<BigParticleSystem> explosion1 = std::make_shared<BigParticleSystem>(200, 2.0f, sf::Color(166, 68, 151), enemy->GetPosition(), 3.2f, 13.0f, 3.5f);
 							std::shared_ptr<BigParticleSystem> explosion2 = std::make_shared<BigParticleSystem>(40, 1.5f, sf::Color(207, 194, 17), enemy->GetPosition(), 3.0f, 5.0f, 2.0f);
-							std::shared_ptr<BigParticleSystem> explosion3 = std::make_shared<BigParticleSystem>(80, 2.0f, sf::Color(196, 6, 41), enemy->GetPosition(), 3.0f, 10.0f, 3.5f);
-							std::shared_ptr<BigParticleSystem> explosion4 = std::make_shared<BigParticleSystem>(70, 2.0f, sf::Color(255, 128, 0), enemy->GetPosition(), 3.0f, 10.0f, 2.9f);
 							enemyManager.AddExplosion(explosion1);
 							enemyManager.AddExplosion(explosion2);
-							enemyManager.AddExplosion(explosion3);
-							enemyManager.AddExplosion(explosion4);
 						}
 					}
 
@@ -138,7 +134,7 @@ int main()
 	SpriteManager spriteManager;
 
 	sf::Texture&  playerTexture = spriteManager.GetTexture("../sprites/Engine_Ss_png.png");
-	sf::Texture& playerProjectileTexture = spriteManager.GetTexture("../sprites/rocket.png");
+	sf::Texture& playerProjectileTexture = spriteManager.GetTexture("../sprites/Projectile_png.png");
 	sf::Texture enemyTexture;
 
 	Player player(&playerTexture, &playerProjectileTexture, 600.f, view, sf::Vector2u(4, 1), 0.1f);
