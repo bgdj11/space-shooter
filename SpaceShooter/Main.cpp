@@ -170,6 +170,9 @@ int main()
 		enemyManager.Update(deltaTime, window);
 		player.Draw(window);
 		enemyManager.DrawEnemies(window);
+
+		background.DrawFrame(window);
+
 		window.display();
 	}
     return 0;

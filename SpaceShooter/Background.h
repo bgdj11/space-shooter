@@ -18,10 +18,13 @@ public:
 	~Background();
 	void Update(float deltaTime, float screenSize);
 	void Draw(sf::RenderWindow& window);
+	void CreateFrame(sf::View& view, float thickness);
+	void DrawFrame(sf::RenderWindow& window);
 
 private:
 	sf::VertexArray spaceBackground;
 	std::vector<Star> stars;
+	std::vector<sf::RectangleShape> frame;
 	std::mt19937 gen;
 	std::uniform_real_distribution<float> distx;
 	std::uniform_real_distribution<float> disty;

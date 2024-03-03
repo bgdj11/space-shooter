@@ -24,11 +24,41 @@ void CreateBackground(sf::View& view, sf::VertexArray& spaceBackground)
 	spaceBackground[7].color = sf::Color(13, 13, 35);
 }
 
+void Background::CreateFrame(sf::View& view, float thickness)
+{
+	sf::Vector2f viewSize = view.getSize();
+
+	sf::RectangleShape topBorder(sf::Vector2f(viewSize.x, thickness));
+	topBorder.setOrigin(sf::Vector2f(topBorder.getSize().x / 2, topBorder.getSize().y / 2));
+	topBorder.setPosition(viewSize.x / 2, 0.0f);
+	topBorder.setFillColor(sf::Color(154, 176, 67));
+	frame.push_back(topBorder);
+
+	sf::RectangleShape bottomBorder(sf::Vector2f(viewSize.x, thickness));
+	bottomBorder.setOrigin(sf::Vector2f(bottomBorder.getSize().x / 2, bottomBorder.getSize().y / 2));
+	bottomBorder.setPosition(viewSize.x / 2, viewSize.y);
+	bottomBorder.setFillColor(sf::Color(154, 176, 67));
+	frame.push_back(bottomBorder);
+
+	sf::RectangleShape leftBorder(sf::Vector2f(thickness, viewSize.y));
+	leftBorder.setOrigin(sf::Vector2f(leftBorder.getSize().x / 2, leftBorder.getSize().y / 2));
+	leftBorder.setPosition(0.0f, viewSize.y / 2);
+	leftBorder.setFillColor(sf::Color(154, 176, 67));
+	frame.push_back(leftBorder);
+
+	sf::RectangleShape rightBorder(sf::Vector2f(thickness, viewSize.y));
+	rightBorder.setOrigin(sf::Vector2f(rightBorder.getSize().x / 2, rightBorder.getSize().y / 2));
+	rightBorder.setPosition(viewSize.x, viewSize.y / 2);
+	rightBorder.setFillColor(sf::Color(154, 176, 67));
+	frame.push_back(rightBorder);
+}
+
 Background::Background(sf::View& view) 
 	: spaceBackground(sf::Quads, 8), gen(std::random_device()()), disty(-200.0f, (float)view.getSize().y), distx(-10.0f, (float)view.getSize().x + 10.0f),
 		dists(1.5f, 4.0f), distr(0.0f, 90.0f), distc(0, 255)
 {
 	CreateBackground(view, spaceBackground);
+	CreateFrame(view, 10.0f);
 
 	for (int i = 0; i < 150; i++)
 	{
@@ -71,5 +101,13 @@ void Background::Draw(sf::RenderWindow& window)
 		square.setOutlineColor(sf::Color::Black);
 		square.setOutlineThickness(0.8f);
 		window.draw(square);
+	}
+}
+
+void Background::DrawFrame(sf::RenderWindow& window)
+{
+	for (auto& border : frame)
+	{
+		window.draw(border);
 	}
 }
