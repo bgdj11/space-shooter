@@ -16,10 +16,10 @@ Player::Player(sf::Texture* texture, sf::Texture* projectileTexture, float speed
 	shieldResetTimer = 5.0f;
 	isShieldActive = false;
 
-	body.setSize(sf::Vector2f(texture->getSize().x / imageCount.x / 2.5f, texture->getSize().y / 2.5f));
+	body.setSize(sf::Vector2f(texture->getSize().x / imageCount.x / 3.0f, texture->getSize().y / 3.0f));
 	body.setOrigin(body.getSize() / 2.0f);
 	body.setTexture(texture);
-	body.setPosition(view.getSize().x / 2.0f, view.getSize().y - 100.0f);
+	body.setPosition(view.getSize().x / 2.0f, view.getSize().y - 50.0f);
 
 	collisionBox.setSize(sf::Vector2f(body.getSize().x * 0.4f, body.getSize().y * 0.3f));
 	collisionBox.setOrigin(sf::Vector2f(collisionBox.getSize().x / 2.0f, collisionBox.getSize().y / 2.0f + 30.0f));
@@ -34,8 +34,6 @@ Player::~Player()
 
 void Player::Update(float deltaTime, sf::View& view)
 {
-	body.setPosition(body.getPosition().x, view.getSize().y - 100.0f);
-
 	sf::Vector2f movement(0.0f, 0.0f);
 	HandleInput(deltaTime, &movement, &fireTimer, &bulletCnt);
 

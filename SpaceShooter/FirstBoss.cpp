@@ -64,11 +64,11 @@ void FirstBoss::Update(float deltaTime)
 		if (fireTimer >= fireCooldown)
 		{
 			std::shared_ptr<EnemyProjectile> projectile1 = std::make_shared<FirstBossProjectile>(projectileTexture,
-				sf::Vector2f(body.getPosition().x, body.getPosition().y - 25.0f), 500.0f, false);
+				sf::Vector2f(body.getPosition().x, body.getPosition().y - 25.0f), 300.0f, false);
 			projectiles.push_back(projectile1);
 
 			std::shared_ptr<EnemyProjectile> projectile2 = std::make_shared<FirstBossProjectile>(projectileTexture,
-				sf::Vector2f(body.getPosition().x, body.getPosition().y - 25.0f), 500.0f, true);
+				sf::Vector2f(body.getPosition().x, body.getPosition().y - 25.0f), 300.0f, true);
 			projectiles.push_back(projectile2);
 
 			fireTimer = 0.0f;

@@ -2,7 +2,7 @@
 
 SpriteManager::SpriteManager()
 {
-    LoadTexture("../sprites/Engine_Ss_png.png"); // Player
+    LoadTexture("../sprites/Player_Ss_png.png"); // Player
     LoadTexture("../sprites/rocket.png"); // PlayerProjectile
     LoadTexture("../sprites/Projectile_png.png"); // PlayerProjectile
 
@@ -10,7 +10,7 @@ SpriteManager::SpriteManager()
     LoadTexture("../sprites/Boss_1_Ss_png.png");
     LoadTexture("../sprites/Enemy1_Ss_png.png");
     LoadTexture("../sprites/enemy_laser.png");
-    LoadTexture("../sprites/projectile.png");
+    LoadTexture("../sprites/Enemy_A1_Ss_Png.png"); // boss projectile
 
     // Rocks
     LoadTexture("../sprites/rock1.png");

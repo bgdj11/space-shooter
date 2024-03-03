@@ -71,6 +71,21 @@ Background::Background(sf::View& view)
 
 		stars.push_back(star);
 	}
+
+	// Large stars
+	for (int i = 0; i < 30; i++)
+	{
+		Star star;
+		star.position = sf::Vector2f(distx(gen), disty(gen));
+		star.size = dists(gen) * 2.2;
+		star.rotation = distr(gen);
+		star.velocity = sf::Vector2f(0.0f, 30.0f);
+		star.color = sf::Color(distc(gen), distc(gen), 10);
+
+		stars.push_back(star);
+	}
+
+
 }
 
 Background::~Background()

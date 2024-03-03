@@ -133,7 +133,7 @@ int main()
 
 	SpriteManager spriteManager;
 
-	sf::Texture&  playerTexture = spriteManager.GetTexture("../sprites/Engine_Ss_png.png");
+	sf::Texture&  playerTexture = spriteManager.GetTexture("../sprites/Player_Ss_png.png");
 	sf::Texture& playerProjectileTexture = spriteManager.GetTexture("../sprites/Projectile_png.png");
 	sf::Texture enemyTexture;
 

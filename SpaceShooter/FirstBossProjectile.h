@@ -1,5 +1,6 @@
 #pragma once
 #include "EnemyProjectile.h"
+#include "Animator.h"
 
 class FirstBossProjectile : public EnemyProjectile
 {
@@ -12,5 +13,6 @@ public:
 private:
 	float accumulatedTime;
 	bool sign;
+	Animator animator;
 };
 
