@@ -220,6 +220,8 @@ int main()
 	sf::Clock fpsClock;
 	sf::Clock printClock;
 
+	window.setFramerateLimit(100);
+
 	while (window.isOpen())
 	{
 		deltaTime = clock.restart().asSeconds();
