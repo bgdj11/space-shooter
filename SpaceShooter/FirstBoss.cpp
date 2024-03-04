@@ -3,7 +3,7 @@
 FirstBoss::FirstBoss(sf::Texture* texture, sf::Vector2f size, sf::Vector2f position, sf::Texture* projectileTexture)
 	: animator(texture, sf::Vector2u(4, 1), 0.1f)
 {
-	health = 10;
+	health = 10.0f;
 	damage = 3;
 	speed = 200.0f;
 	status = true;

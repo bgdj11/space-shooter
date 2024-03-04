@@ -5,11 +5,12 @@
 #include "GameObject.h"
 #include <memory>
 #include "BigParticleSystem.h"
+#include "Laser.h"
 
 class Player : public GameObject
 {
 public:
-	Player(sf::Texture* texture, sf::Texture* projectileTexture, float speed, sf::View& view, sf::Vector2u imageCount, float switchTime);
+	Player(sf::Texture* texture, sf::Texture* projectileTexture, sf::Texture* laserTexture, float speed, sf::View& view, sf::Vector2u imageCount, float switchTime);
 	~Player();
 
 	void Update(float deltaTime, sf::View& view);
@@ -20,6 +21,9 @@ public:
 	void TakeDamage(int damage);
 	int GetHealth();
 	void Hurt();
+	bool IsLaserActive();
+	Laser& GetLaser();
+	float GetLaserDamage();
 
 private:
 	int health;
@@ -37,6 +41,9 @@ private:
 	float shieldTimer;
 	float shieldResetTimer;
 	bool isShieldActive;
+	Laser laser;
+	bool isLaserActive;
+	float laserDamage;
 };
 
 

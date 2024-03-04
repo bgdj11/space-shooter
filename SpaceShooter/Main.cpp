@@ -6,6 +6,7 @@
 #include "SpriteManager.h"
 #include <iostream>
 #include "Background.h"
+#include "Laser.h"
 
 static const float VIEW_WIDTH = 1080.0f;
 static const float VIEW_HEIGHT = 1080.0f;
@@ -74,6 +75,24 @@ void HandleCollisions(Player& player, EnemyManager& enemyManager)
 					enemy->AddExplosion(explosion);
 				}
 			}
+
+			if (player.IsLaserActive())
+			{
+				if (player.GetLaser().GetCollider().CheckCollision(enemy->GetCollider()))
+				{
+					enemy->TakeDamage(player.GetLaserDamage());
+					if (enemy->GetHealth() <= 0)
+					{
+						// enemy death
+						enemy->SetStatus(false);
+						std::shared_ptr<BigParticleSystem> explosion = std::make_shared<BigParticleSystem>(80, 2.0f, sf::Color(166, 68, 151), enemy->GetPosition(), 3.0f, 10.0f, 2.5f);
+						enemyManager.AddExplosion(explosion);
+					}
+
+					std::shared_ptr<BigParticleSystem> explosion = std::make_shared<BigParticleSystem>(1, 2.0f, sf::Color(32, 186, 166), enemy->GetPosition(), 3.0f, 6.0f, 1.5f);
+					player.AddExplosion(explosion);
+				}
+			}
 		}
 	}
 	else if (enemyManager.GetActiveWave() == 1)
@@ -118,6 +137,24 @@ void HandleCollisions(Player& player, EnemyManager& enemyManager)
 					player.TakeDamage(enemyProjectile->GetDamage());
 					std::shared_ptr<BigParticleSystem> explosion = std::make_shared<BigParticleSystem>(20, 2.0f, sf::Color(252, 186, 3), enemyProjectile->GetPosition(), 3.0f, 6.0f, 1.0f);
 					enemy->AddExplosion(explosion);
+				}
+			}
+
+			if (player.IsLaserActive())
+			{
+				if (player.GetLaser().GetCollider().CheckCollision(enemy->GetCollider()))
+				{
+					enemy->TakeDamage(player.GetLaserDamage());
+					if (enemy->GetHealth() <= 0)
+					{
+						// enemy death
+						enemy->SetStatus(false);
+						std::shared_ptr<BigParticleSystem> explosion = std::make_shared<BigParticleSystem>(80, 2.0f, sf::Color(166, 68, 151), enemy->GetPosition(), 3.0f, 10.0f, 2.5f);
+						enemyManager.AddExplosion(explosion);
+					}
+
+					std::shared_ptr<BigParticleSystem> explosion = std::make_shared<BigParticleSystem>(1, 2.0f, sf::Color(32, 186, 166), enemy->GetPosition(), 3.0f, 6.0f, 1.5f);
+					player.AddExplosion(explosion);
 				}
 			}
 
@@ -169,9 +206,10 @@ int main()
 
 	sf::Texture&  playerTexture = spriteManager.GetTexture("../sprites/Player_Ss_png.png");
 	sf::Texture& playerProjectileTexture = spriteManager.GetTexture("../sprites/Projectile_png.png");
+	sf::Texture& laserTexture = spriteManager.GetTexture("../sprites/Laser_png.png");
 	sf::Texture enemyTexture;
 
-	Player player(&playerTexture, &playerProjectileTexture, 600.f, view, sf::Vector2u(4, 1), 0.1f);
+	Player player(&playerTexture, &playerProjectileTexture, &laserTexture, 600.f, view, sf::Vector2u(4, 1), 0.1f);
 	EnemyManager enemyManager(&spriteManager, view);
 
 	Background background(view);
@@ -179,6 +217,8 @@ int main()
     // TIME
     float deltaTime = 0.0f;
     sf::Clock clock;
+	sf::Clock fpsClock;
+	sf::Clock printClock;
 
 	while (window.isOpen())
 	{
@@ -208,6 +248,14 @@ int main()
 		background.DrawFrame(window);
 
 		window.display();
+
+		float fps = 1.0f / fpsClock.getElapsedTime().asSeconds();
+		fpsClock.restart();
+
+		if (printClock.getElapsedTime().asSeconds() >= 2.0f) {
+			std::cout << "FPS: " << fps << std::endl;
+			printClock.restart(); 
+		}
 	}
     return 0;
 }

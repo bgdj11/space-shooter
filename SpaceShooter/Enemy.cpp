@@ -36,7 +36,7 @@ bool Enemy::IsBoss()
 	return boss;
 }
 
-void Enemy::TakeDamage(int damage)
+void Enemy::TakeDamage(float damage)
 {
 	health -= damage;
 	Hurt();

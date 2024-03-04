@@ -1,8 +1,8 @@
 #include "Player.h"
 #include <iostream>
 
-Player::Player(sf::Texture* texture, sf::Texture* projectileTexture, float speed, sf::View& view, sf::Vector2u imageCount, float switchTime)
-	: animator(texture, imageCount, switchTime)
+Player::Player(sf::Texture* texture, sf::Texture* projectileTexture, sf::Texture* laserTexture, float speed, sf::View& view, sf::Vector2u imageCount, float switchTime)
+	: animator(texture, imageCount, switchTime), laser(laserTexture, sf::Vector2f(view.getSize().x / 2.0f, view.getSize().y - 70.0f))
 {
 	this->speed = speed;
 	rotation = 0;
@@ -15,6 +15,8 @@ Player::Player(sf::Texture* texture, sf::Texture* projectileTexture, float speed
 	shieldTimer = 0.5f;
 	shieldResetTimer = 5.0f;
 	isShieldActive = false;
+	isLaserActive = false;
+	laserDamage = 0.03f;
 
 	body.setSize(sf::Vector2f(texture->getSize().x / imageCount.x / 3.0f, texture->getSize().y / 3.0f));
 	body.setOrigin(body.getSize() / 2.0f);
@@ -35,6 +37,9 @@ Player::~Player()
 void Player::Update(float deltaTime, sf::View& view)
 {
 	sf::Vector2f movement(0.0f, 0.0f);
+
+	isLaserActive = false;
+
 	HandleInput(deltaTime, &movement, &fireTimer, &bulletCnt);
 
 	// ANIMATION
@@ -105,6 +110,8 @@ void Player::Update(float deltaTime, sf::View& view)
 		isShieldActive = false;
 	}
 
+	// Laser
+	laser.Update(sf::Vector2f(body.getPosition().x, body.getPosition().y - 20.0f), deltaTime);
 }
 
 void Player::Draw(sf::RenderWindow& window)
@@ -118,6 +125,8 @@ void Player::Draw(sf::RenderWindow& window)
 		partSys->Draw(window, sf::RenderStates());
 	}
 
+	if (isLaserActive)
+		laser.Draw(window);
 	window.draw(body);
 }
 
@@ -133,7 +142,7 @@ void Player::HandleInput(float deltaTime, sf::Vector2f* movement, float* fireTim
 		movement->x += speed * deltaTime;
 		rotation = 10.0f;
 	}
-	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Z) && *fireTimer >= fireRate && *bulletCnt > 0))
+	if (((sf::Keyboard::isKeyPressed(sf::Keyboard::Z) || sf::Keyboard::isKeyPressed(sf::Keyboard::Y)) && *fireTimer >= fireRate && *bulletCnt > 0))
 	{
 		*bulletCnt -= 1;
 		*fireTimer = 0.0f;
@@ -148,6 +157,10 @@ void Player::HandleInput(float deltaTime, sf::Vector2f* movement, float* fireTim
 		isShieldActive = true;
 		shieldTimer = 0.0f;
 		shieldResetTimer = 0.0f;
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::C))
+	{
+		isLaserActive = true;
 	}
 }
 
@@ -178,4 +191,19 @@ int Player::GetHealth()
 void Player::Hurt()
 {
 	hurtTimer = 0.0f;
+}
+
+bool Player::IsLaserActive()
+{
+	return isLaserActive;
+}
+
+Laser& Player::GetLaser()
+{
+	return laser;
+}
+
+float Player::GetLaserDamage()
+{
+	return laserDamage;
 }

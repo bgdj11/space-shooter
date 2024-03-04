@@ -9,7 +9,7 @@ BasicEnemy::BasicEnemy(sf::Texture* texture, sf::Vector2f size, sf::Vector2f pos
 	std::uniform_int_distribution<> dis(0, 1);
 	std::uniform_real_distribution<> disFire(1.5f, 7.5f);
 
-	health = 3;
+	health = 4.0f;
 	damage = 1;
 	speed = 200.0f;
 	status = true;

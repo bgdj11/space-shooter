@@ -5,6 +5,7 @@ SpriteManager::SpriteManager()
     LoadTexture("../sprites/Player_Ss_png.png"); // Player
     LoadTexture("../sprites/rocket.png"); // PlayerProjectile
     LoadTexture("../sprites/Projectile_png.png"); // PlayerProjectile
+    LoadTexture("../sprites/Laser_png.png");
 
     // First wave
     LoadTexture("../sprites/Boss_1_Ss_png.png");

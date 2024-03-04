@@ -6,7 +6,7 @@
 class Enemy : public GameObject
 {
 protected:
-    int health;
+    float health;
 	int damage;
 	bool status;
 	float speed;
@@ -18,7 +18,7 @@ protected:
 	bool boss;
 	
 public:
-	void TakeDamage(int damage);
+	void TakeDamage(float damage);
 	int GetDamage();
 	int GetHealth();
 	void SetStatus(bool status);
