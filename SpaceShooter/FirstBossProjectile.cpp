@@ -40,6 +40,6 @@ void FirstBossProjectile::Update(float deltaTime)
 		movement.x = -2.0f * cos(accumulatedTime * 8);
 
 	body.move(movement);
-	body.rotate(30.0f);
+	body.rotate(20.0f);
 	collisionBox.move(movement);
 }
