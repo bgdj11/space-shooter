@@ -4,11 +4,11 @@ Laser::Laser(sf::Texture* texture, sf::Vector2f position)
 {
 	body.setSize(sf::Vector2f(20.0f, 1500.0f));
 	body.setTexture(texture);
-	body.setOrigin(sf::Vector2f(body.getSize().x / 2.0f, body.getSize().y));
+	body.setOrigin(sf::Vector2f(body.getSize().x / 2.0f, body.getSize().y / 2.0f));
 	body.setPosition(position);
 
 	collisionBox.setSize(body.getSize());
-	collisionBox.setOrigin(sf::Vector2f(body.getSize().x / 2.0f, body.getSize().y));
+	collisionBox.setOrigin(sf::Vector2f(body.getSize().x / 2.0f, body.getSize().y / 2.0f));
 	collisionBox.setPosition(body.getPosition());
 }
 

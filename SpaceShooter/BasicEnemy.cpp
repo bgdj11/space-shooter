@@ -24,7 +24,7 @@ BasicEnemy::BasicEnemy(sf::Texture* texture, sf::Vector2f size, sf::Vector2f pos
 	body.setOrigin(body.getSize() / 2.0f);
 
 	collisionBox.setSize(sf::Vector2f(body.getSize().x * 0.2f, body.getSize().y * 0.5f));
-	collisionBox.setFillColor(sf::Color::Red);
+	//collisionBox.setFillColor(sf::Color::Red);
 	collisionBox.setOrigin(collisionBox.getSize() / 2.0f);
 	collisionBox.setPosition(body.getPosition());
 

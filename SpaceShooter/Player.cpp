@@ -111,7 +111,7 @@ void Player::Update(float deltaTime, sf::View& view)
 	}
 
 	// Laser
-	laser.Update(sf::Vector2f(body.getPosition().x, body.getPosition().y - 20.0f), deltaTime);
+	laser.Update(sf::Vector2f(body.getPosition().x, body.getPosition().y - 780.0f), deltaTime);
 }
 
 void Player::Draw(sf::RenderWindow& window)
