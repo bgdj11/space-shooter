@@ -1,3 +1,5 @@
+#define _CRTDBG_MAP_ALLOC
+
 #include <SFML/Graphics.hpp>
 #include "Player.h"
 #include "EnemyManager.h"
@@ -7,6 +9,7 @@
 #include <iostream>
 #include "Background.h"
 #include "Laser.h"
+#include <crtdbg.h>
 
 static const float VIEW_WIDTH = 1080.0f;
 static const float VIEW_HEIGHT = 1080.0f;
@@ -89,7 +92,7 @@ void HandleCollisions(Player& player, EnemyManager& enemyManager)
 						enemyManager.AddExplosion(explosion);
 					}
 
-					std::shared_ptr<BigParticleSystem> explosion = std::make_shared<BigParticleSystem>(1, 2.0f, sf::Color(32, 186, 166), enemy->GetPosition(), 3.0f, 6.0f, 1.5f);
+					std::shared_ptr<BigParticleSystem> explosion = std::make_shared<BigParticleSystem>(1, 2.0f, sf::Color(160, 219, 222), enemy->GetPosition(), 3.0f, 6.0f, 1.5f);
 					player.AddExplosion(explosion);
 				}
 			}
@@ -164,7 +167,7 @@ void HandleCollisions(Player& player, EnemyManager& enemyManager)
 						}
 					}
 
-					std::shared_ptr<BigParticleSystem> explosion = std::make_shared<BigParticleSystem>(1, 2.0f, sf::Color(32, 186, 166), enemy->GetPosition(), 3.0f, 6.0f, 1.5f);
+					std::shared_ptr<BigParticleSystem> explosion = std::make_shared<BigParticleSystem>(1, 2.0f, sf::Color(160, 219, 222), enemy->GetPosition(), 3.0f, 6.0f, 1.5f);
 					player.AddExplosion(explosion);
 				}
 			}
@@ -215,7 +218,7 @@ void HandleCollisions(Player& player, EnemyManager& enemyManager)
 						enemyManager.AddExplosion(explosion);
 					}
 
-					std::shared_ptr<BigParticleSystem> explosion = std::make_shared<BigParticleSystem>(1, 2.0f, sf::Color(32, 186, 166), enemy->GetPosition(), 3.0f, 6.0f, 1.5f);
+					std::shared_ptr<BigParticleSystem> explosion = std::make_shared<BigParticleSystem>(1, 2.0f, sf::Color(160, 219, 222), enemy->GetPosition(), 3.0f, 6.0f, 1.5f);
 					player.AddExplosion(explosion);
 				}
 			}
@@ -225,6 +228,8 @@ void HandleCollisions(Player& player, EnemyManager& enemyManager)
 
 int main()
 {
+	//_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
 	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Space Shooter", sf::Style::Fullscreen);
 	sf::View view(sf::FloatRect(0, 0, VIEW_WIDTH, VIEW_HEIGHT));
 
@@ -232,12 +237,12 @@ int main()
 
 	SpriteManager spriteManager;
 
-	sf::Texture&  playerTexture = spriteManager.GetTexture("../sprites/Player_Ss_png.png");
+	sf::Texture&  playerTexture = spriteManager.GetTexture("../sprites/Character_Ss_final.png");
 	sf::Texture& playerProjectileTexture = spriteManager.GetTexture("../sprites/Projectile_png.png");
 	sf::Texture& laserTexture = spriteManager.GetTexture("../sprites/Laser_png.png");
 	sf::Texture enemyTexture;
 
-	Player player(&playerTexture, &playerProjectileTexture, &laserTexture, 600.f, view, sf::Vector2u(4, 1), 0.1f);
+	Player player(&playerTexture, &playerProjectileTexture, &laserTexture, 600.f, view, sf::Vector2u(4, 2), 0.1f);
 	EnemyManager enemyManager(&spriteManager, view);
 
 	Background background(view);
@@ -287,5 +292,7 @@ int main()
 			printClock.restart(); 
 		}
 	}
+
+	_CrtDumpMemoryLeaks();
     return 0;
 }

@@ -12,13 +12,13 @@ Player::Player(sf::Texture* texture, sf::Texture* projectileTexture, sf::Texture
 	bulletCnt = 5;
 	health = 2;
 	hurtTimer = 0.3f;
-	shieldTimer = 0.5f;
+	shieldTimer = 1.0f;
 	shieldResetTimer = 5.0f;
 	isShieldActive = false;
 	isLaserActive = false;
 	laserDamage = 0.03f;
 
-	body.setSize(sf::Vector2f(texture->getSize().x / imageCount.x / 3.0f, texture->getSize().y / 3.0f));
+	body.setSize(sf::Vector2f(texture->getSize().x / imageCount.x / 3.0f, texture->getSize().y / 6.0f));
 	body.setOrigin(body.getSize() / 2.0f);
 	body.setTexture(texture);
 	body.setPosition(view.getSize().x / 2.0f, view.getSize().y - 50.0f);
@@ -41,10 +41,6 @@ void Player::Update(float deltaTime, sf::View& view)
 	isLaserActive = false;
 
 	HandleInput(deltaTime, &movement, &fireTimer, &bulletCnt);
-
-	// ANIMATION
-	animator.Update(0, deltaTime);
-	body.setTextureRect(animator.uvRect);
 
 	// ROTATION
 	if (movement.x != 0.0f)
@@ -100,14 +96,21 @@ void Player::Update(float deltaTime, sf::View& view)
 	// Shield and hurt body color
 	shieldResetTimer += deltaTime;
 	shieldTimer += deltaTime;
-	if(shieldTimer < 0.5f)
-		body.setFillColor(sf::Color(0, 147, 255));
+	if (shieldTimer < 1.0f)
+	{
+		// ANIMATION - SHILED
+		animator.Update(1, deltaTime);
+		body.setTextureRect(animator.uvRect);
+	}
 	else if (hurtTimer < 0.3f)
 		body.setFillColor(sf::Color::Red);
 	else
 	{
 		body.setFillColor(sf::Color::White);
 		isShieldActive = false;
+		// ANIMATION
+		animator.Update(0, deltaTime);
+		body.setTextureRect(animator.uvRect);
 	}
 
 	// Laser
